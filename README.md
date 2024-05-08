@@ -40,7 +40,7 @@ A minimum expected outcome, however, is: One draft of a library in one additiona
 
 A non-exclusive list would look like this
 
-1. Extracting test cases for all Token modes from the Python library
+1. Extracting test cases for all Token modes from the Python library (https://github.com/EnAccess/OpenPAYGO-Token/tree/main/tests)
 2. Implement the OpenPAYGO Token algorithm in JavaScript
 3. Add test cases based on the result of 1.
 4. Integrate CI/CD pipeline to release the library to NPM
