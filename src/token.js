@@ -1,9 +1,10 @@
-const TokenTypes = require('./constants');
-const siphash = require('../lib/siphash');
+'use strict'
 
+const TokenTypes = require('./constants')
+const siphash24 = require('siphash24')
+const Buffer = require('buffer/').Buffer
 
-class OpenPAYGOTokenShared {    
-
+class OpenPAYGOTokenShared {
     // token configuration
     MAX_BASE = 999
     MAX_ACTIVATION_VALUE = 995
@@ -11,62 +12,68 @@ class OpenPAYGOTokenShared {
     COUNTER_SYNC_VALUE = 999
     TOKEN_VALUE_OFFSET = 1000
 
-    constructor(){
+    constructor() {}
 
-    }
-
-    getTokenBase(code) {
+    static getTokenBase(code) {
         return code % this.TOKEN_VALUE_OFFSET
     }
 
-    genNextToken({ prev_code, key}) {
+    static putBaseInToken(token, tokenBase) {
+        if (tokenBase > this.prototype.MAX_BASE) {
+            throw new Error('Invalid token base value')
+        }
+        return token - this.getTokenBase(token) + tokenBase
+    }
+
+    static genNextToken(prev_code, key) {
         // TODO
     }
 
-    static convertHash2Token(hashObj) {
-        const hash_msb = hashObj.h;
-        const hash_lsb = hashObj.l;
-        const hashUnit = ((hash_msb ^ hash_lsb) >>> 0)
+    static convertHash2Token(hashBuffer) {
+        const hash_msb = this.bytesToUint32(hashBuffer, 0)
+        const hash_lsb = this.bytesToUint32(hashBuffer, 4)
+        const hashUnit = (hash_msb ^ hash_lsb) >>> 0
         const token = this.convertTo29_5_bits(hashUnit)
         return token
     }
 
-    static convertTo29_5_bits(hash_uint){
-        // port from original lib 
+    static convertTo29_5_bits(hash_uint) {
+        // port from original lib
         const mask = ((1 << (32 - 2 + 1)) - 1) << 2
         let temp = (hash_uint & mask) >>> 2
-        if (temp > 999999999)
-            temp = temp - 73741825
+        if (temp > 999999999) temp = temp - 73741825
         return temp
     }
 
+    static convertFrom4digitToken(token) {
+        
+    }
+
     static genStartingCode(key) {
-        const hash = this.genHash({ key: key, message: key})
-        return convertHash2Token(hash)
+        const hash = this.genHash({ key: key, msg: key })
+        return this.convertHash2Token(hash)
     }
 
-    convertTo4dToken(src) {
-        // TODO
-    }
-
+    static convertTo4dToken(src) {}
 
     convert4dTokenFromStr(src) {
         // TODO
     }
 
     static genHash({ key, msg }) {
-        key = siphash.string16_to_key(key)
-        return siphash.hash(key, msg)
+        return siphash24(Buffer.from(msg), Buffer.from(key))
     }
 
-
-    static loadSecretKeyFromHex(secretKeyHex) {
-        
+    static bytesToUint32(bytes, offset) {
+        return (
+            (bytes[offset] << 24) |
+            (bytes[offset + 1] << 16) |
+            (bytes[offset + 2] << 8) |
+            bytes[offset + 3]
+        )
     }
 }
 
-module.exports = { 
-    genHash: OpenPAYGOTokenShared.genHash,
-    convertHash2Token: OpenPAYGOTokenShared.convertHash2Token,
-    convertTo29_5_bits: OpenPAYGOTokenShared.convertTo29_5_bits
+module.exports = {
+    OpenPAYGOTokenShared: OpenPAYGOTokenShared,
 }
