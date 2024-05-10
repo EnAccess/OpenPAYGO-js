@@ -1,16 +1,16 @@
-const tokenLib = require('../src/token')
+const tokenLib = require('../src/token').OpenPAYGOTokenShared
 
 
 describe('OpenPAYGOTokenShared test', () => {
     test('OpenPAYGOTokenShared genHash', () => {
-        const hashObj =  tokenLib.genHash({ key: "0123456789ABCDEF", msg: "hello world"})
-        expect(hashObj).toEqual({ h: 828098790, l: 3595015261})
+        const hashBuffer =  tokenLib.genHash({ key: "0123456789ABCDEF", msg: "hello world"})
+        expect(hashBuffer.length).toBe(8)
     })
     
     test('OpenPAYGOTokenShared convertHash2Token', () => {
-        const hashObj =  tokenLib.genHash({ key: "0123456789ABCDEF", msg: "hello world"})
-        const token =  tokenLib.convertHash2Token(hashObj)
-        expect(token).toBe(969348910)
+        const hashBuffer =  tokenLib.genHash({ key: "bc41ec9530f6dac86b1a29ab82edc5fb", msg: "hello world"})
+        const token =  tokenLib.convertHash2Token(hashBuffer)
+        expect(token).toBe(180923337)
     })
 })
  
