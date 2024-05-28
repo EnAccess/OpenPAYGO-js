@@ -4,9 +4,9 @@ const TokenTypes = require('./constants').TokenTypes
 const shared = require('./token').OpenPAYGOTokenShared
 
 class OpenPAYGOTokenDecoder {
-    MAX_TOKEN_JUMP = 64
-    MAX_TOKEN_JUMP_COUNTER_SYNC = 100
-    MAX_UNUSED_OLDER_TOKENS = 8 * 2
+    static MAX_TOKEN_JUMP = 64
+    static MAX_TOKEN_JUMP_COUNTER_SYNC = 100
+    static MAX_UNUSED_OLDER_TOKENS = 8 * 2
 
     static decodeToken({
         token = '',
@@ -70,7 +70,7 @@ class OpenPAYGOTokenDecoder {
             this.getActivationValueCountAndTypefromToken({
                 token,
                 startingCode,
-                secretKeyHex,
+                keyHex: secretKeyHex,
                 count,
                 restrictedDigitSet,
                 usedCounts,
@@ -99,29 +99,29 @@ class OpenPAYGOTokenDecoder {
         if (restrictedDigitSet) {
             token = shared.convertFrom4digitToken(token)
         }
-        const validOldToken = false
+        let validOldToken = false
         // obtain base of token
         const tokenBase = shared.getTokenBase(token)
         // put base into the starting code
-        const currentCode = shared.putBaseInToken(startingCode, tokenBase)
+        let currentCode = shared.putBaseInToken(startingCode, tokenBase)
         // obtain base of starting code
         const startCodeBase = shared.getTokenBase(startingCode)
 
         let value = this.decodeBase(startCodeBase, tokenBase)
         let maxCountTry
         if (value === TokenTypes.COUNTER_SYNC) {
-            maxCountTry = count + this.prototype.MAX_TOKEN_JUMP_COUNTER_SYNC + 1
+            maxCountTry = count + this.MAX_TOKEN_JUMP_COUNTER_SYNC + 1
         } else {
-            maxCountTry = count + this.prototype.MAX_TOKEN_JUMP + 1
+            maxCountTry = count + this.MAX_TOKEN_JUMP + 1
         }
 
-        for (let cnt = 0; cnt <= maxCountTry; cnt++) {
+        for (let cnt = 0; cnt < maxCountTry; cnt++) {
             const maskedToken = shared.putBaseInToken(currentCode, tokenBase)
             let tokenType
             if (cnt % 2 !== 0) {
-                if (value === shared.prototype.COUNTER_SYNC_VALUE) {
+                if (value === shared.COUNTER_SYNC_VALUE) {
                     tokenType = TokenTypes.COUNTER_SYNC
-                } else if (value === shared.prototype.PAYG_DISABLE_VALUE) {
+                } else if (value === shared.PAYG_DISABLE_VALUE) {
                     tokenType = TokenTypes.PAYG_DISABLE_VALUE
                 } else {
                     tokenType = TokenTypes.SET_TIME
@@ -147,7 +147,7 @@ class OpenPAYGOTokenDecoder {
                         updatedCounts,
                     }
                 } else {
-                    validOldToken = True
+                    validOldToken = true
                 }
             }
             currentCode = shared.genNextToken(currentCode, keyHex)
@@ -169,14 +169,14 @@ class OpenPAYGOTokenDecoder {
     }
 
     static countIsValid(count, lastCount, value, type, usedCounts) {
-        if (value === shared.prototype.COUNTER_SYNC_VALUE) {
-            if (count > lastCount - this.prototype.MAX_TOKEN_JUMP) {
+        if (value === shared.COUNTER_SYNC_VALUE) {
+            if (count > lastCount - this.MAX_TOKEN_JUMP) {
                 return true
             }
         } else if (count > lastCount) {
             return true
-        } else if (this.prototype.MAX_UNUSED_OLDER_TOKENS > 0) {
-            if (count > lastCount - this.prototype.MAX_UNUSED_OLDER_TOKENS) {
+        } else if (this.MAX_UNUSED_OLDER_TOKENS > 0) {
+            if (count > lastCount - this.MAX_UNUSED_OLDER_TOKENS) {
                 if (
                     usedCounts.includes(count) &&
                     type === TokenTypes.ADD_TIME
@@ -185,7 +185,7 @@ class OpenPAYGOTokenDecoder {
                 }
             }
         }
-        return False
+        return false
     }
 
     static updateUsedCounts(pastUsedCounts, value, newCount, type) {
@@ -194,14 +194,13 @@ class OpenPAYGOTokenDecoder {
         }
         let highestCount = pastUsedCounts.length ? Math.max(pastUsedCounts) : 0
         highestCount = newCount > highestCount ? newCount : highestCount
-        const bottomRange =
-            highestCount - this.prototype.MAX_UNUSED_OLDER_TOKENS
+        const bottomRange = highestCount - this.MAX_UNUSED_OLDER_TOKENS
         const usedCounts = []
 
         if (
             type !== TokenTypes.ADD_TIME ||
-            value === shared.prototype.COUNTER_SYNC_VALUE ||
-            value === shared.prototype.PAYG_DISABLE_VALUE
+            value === shared.COUNTER_SYNC_VALUE ||
+            value === shared.PAYG_DISABLE_VALUE
         ) {
             // If it is not an Add-Time token, we mark all the past tokens as used in the
             // range
