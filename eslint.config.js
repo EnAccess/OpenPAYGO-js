@@ -1,15 +1,15 @@
-import js from "@eslint/js";
+const js = require('@eslint/js')
 
-export default [
+module.exports = [
     js.configs.recommended,
 
-   {
-       rules: {
-           "no-unused-vars": "off",
-           "no-undef": "off"
-       }
-   },
-   {
-    ignores: ["test/*", "lib/*"]
-   }
-];
+    {
+        rules: {
+            'no-unused-vars': 'off',
+            'no-undef': 'off',
+        },
+    },
+    {
+        ignores: ['test/*', 'lib/*'],
+    },
+]

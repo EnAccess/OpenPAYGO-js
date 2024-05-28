@@ -66,7 +66,7 @@ class OpenPAYGOTokenDecoder {
         //         })
         // }
 
-        var { value, tokenType, count, updatedCounts } =
+        var { value, tokenType, newCount, updatedCounts } =
             this.getActivationValueCountAndTypefromToken({
                 token,
                 startingCode,
@@ -83,7 +83,7 @@ class OpenPAYGOTokenDecoder {
         return {
             value: value,
             tokenType: tokenType,
-            count: count,
+            count: newCount,
             updatedCounts: updatedCounts,
         }
     }
