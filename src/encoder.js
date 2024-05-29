@@ -29,16 +29,16 @@ class OpenPAYGOTokenEncoder {
                 throw new Error("'value' argument is undefined.")
             }
             value = Math.round(value * valueDivider)
-            if (value > shared.prototype.MAX_ACTIVATION_VALUE) {
+            if (value > shared.MAX_ACTIVATION_VALUE) {
                 throw new Error('The value provided is too high.')
             }
         } else if (value !== undefined) {
             throw new Error('A value is not allowed for this token type.')
         } else {
             if (tokenType === TokenTypes.DISABLE_PAYG) {
-                value = shared.prototype.PAYG_DISABLE_VALUE
+                value = shared.PAYG_DISABLE_VALUE
             } else if (tokenType === TokenTypes.COUNTER_SYNC) {
-                value = shared.prototype.COUNTER_SYNC_VALUE
+                value = shared.COUNTER_SYNC_VALUE
             } else {
                 throw new Error('The token type provided is not supported.')
             }
@@ -67,13 +67,13 @@ class OpenPAYGOTokenEncoder {
         let currentToken = shared.putBaseInToken(startingCode, tokenBase)
         const newCount = this.getNewCount(count, mode)
 
-        for (let i = 0; i < newCount; i++) {
+        for (let i = 0; i < newCount - 1; i++) {
             currentToken = shared.genNextToken(currentToken, key)
         }
         let finalToken = shared.putBaseInToken(currentToken, tokenBase)
 
         if (restrictDigitSet) {
-            finalToken = shared.convertTo4dToken(finalToken)
+            finalToken = shared.convertToNdigitToken(finalToken)
             finalToken = String(finalToken).padStart(15, '0')
         } else {
             finalToken = String(finalToken).padStart(9, '0')

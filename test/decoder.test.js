@@ -16,10 +16,10 @@ describe('OpenPAYGOTokenDecoder test', () => {
                 restrictedDigitSet: data.restricted_digit_set,
             }
         )
-        console.log('value: ', value)
-        console.log('tokenType: ', tokenType)
-        console.log('count: ', count)
-        console.log('updatedCounts: ', updatedCounts)
-        expect(tokenType).toEqual(TokenTypes.ADD_TIME)
+
+        expect(value).toBeUndefined()
+        expect(count).toBeUndefined()
+        expect(updatedCounts).toBeUndefined()
+        expect(tokenType).toEqual(TokenTypes.ALREADY_USED)
     })
 })

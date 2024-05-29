@@ -1,16 +1,16 @@
 'use strict'
 
-const TokenTypes = require('./constants')
-const siphash24 = require('siphash24')
+const bigintConversion = require('bigint-conversion')
+const siphash24 = require('siphash')
 const Buffer = require('buffer/').Buffer
 
 class OpenPAYGOTokenShared {
     // token configuration
-    MAX_BASE = 999
-    MAX_ACTIVATION_VALUE = 995
-    PAYG_DISABLE_VALUE = 998
-    COUNTER_SYNC_VALUE = 999
-    TOKEN_VALUE_OFFSET = 1000
+    static MAX_BASE = 999
+    static MAX_ACTIVATION_VALUE = 995
+    static PAYG_DISABLE_VALUE = 998
+    static COUNTER_SYNC_VALUE = 999
+    static TOKEN_VALUE_OFFSET = 1000
 
     constructor() {}
 
@@ -19,19 +19,43 @@ class OpenPAYGOTokenShared {
     }
 
     static putBaseInToken(token, tokenBase) {
-        if (tokenBase > this.prototype.MAX_BASE) {
+        if (tokenBase > this.MAX_BASE) {
             throw new Error('Invalid token base value')
         }
         return token - this.getTokenBase(token) + tokenBase
     }
 
-    static genNextToken(prev_code, key) {
-        // TODO
+    static genNextToken(prev_token, key) {
+        const conformedToken = Buffer.alloc(4) // Allocate buffer of 4 bytes
+        conformedToken.writeUInt32BE(prev_token, 0) // Write the integer value into buffer as big-endian
+
+        // Duplicate the buffer by concatenating it with itself
+        const duplicatedToken = Buffer.concat([conformedToken, conformedToken])
+        let hash = this.genHash({
+            key: key,
+            msg: duplicatedToken,
+            asByte: true,
+        })
+
+        return this.convertHash2Token(hash)
     }
 
-    static convertHash2Token(hashBuffer) {
-        const hash_msb = this.bytesToUint32(hashBuffer, 0)
-        const hash_lsb = this.bytesToUint32(hashBuffer, 4)
+    static convertHash2Token(hash) {
+        // convert hash from hex
+
+        const hashBuffer = bigintConversion.hexToBuf(hash)
+
+        const dView = new DataView(
+            hashBuffer.buffer,
+            hashBuffer.byteOffset,
+            hashBuffer.byteLength
+        )
+
+        // take first 4 btypes
+        const hash_msb = dView.getUint32(0) // as big endian
+        // take last 4 bytes
+        const hash_lsb = dView.getUint32(4) // as big endian
+
         const hashUnit = (hash_msb ^ hash_lsb) >>> 0
         const token = this.convertTo29_5_bits(hashUnit)
         return token
@@ -46,7 +70,14 @@ class OpenPAYGOTokenShared {
     }
 
     static convertFrom4digitToken(token) {
-        
+        // 4 - digit token value
+        let bitArray = []
+        for (let digit of token.toString()) {
+            digit = Number(digit) - 1
+            const tempArr = bitArrayFromInt(digit, 2)
+            bitArray = bitArray.concat(tempArr)
+        }
+        return bitArrayToInt(bitArray)
     }
 
     static genStartingCode(key) {
@@ -54,24 +85,51 @@ class OpenPAYGOTokenShared {
         return this.convertHash2Token(hash)
     }
 
-    static convertTo4dToken(src) {}
+    static convertToNdigitToken(token, digit = 4) {
+        // token should be a number data type
+        let restrictedDigitToken = ''
+        let bitArray = bitArrayFromInt(token, digit * 2)
 
-    convert4dTokenFromStr(src) {
-        // TODO
+        for (let i = 0; i < digit; i++) {
+            restrictedDigitToken += bitArrayToInt(
+                bitArray.slice(i * 2, i * 2 + 2)
+            ).toString()
+        }
+        return Number(restrictedDigitToken)
     }
 
     static genHash({ key, msg }) {
-        return siphash24(Buffer.from(msg), Buffer.from(key))
-    }
-
-    static bytesToUint32(bytes, offset) {
-        return (
-            (bytes[offset] << 24) |
-            (bytes[offset + 1] << 16) |
-            (bytes[offset + 2] << 8) |
-            bytes[offset + 3]
+        let buf
+        if (typeof key === 'object') {
+            buf = key
+        } else {
+            buf = bigintConversion.hexToBuf(key)
+        }
+        const arrayBuffer = buf.buffer.slice(
+            buf.byteOffset,
+            buf.byteOffset + buf.byteLength
         )
+        const uint32Array = new Uint32Array(arrayBuffer)
+        const hash = siphash24.hash_hex(uint32Array, msg)
+
+        return hash
     }
+}
+
+function bitArrayFromInt(number, bitLength) {
+    let bitArray = []
+    for (let i = 0; i < bitLength; i++) {
+        bitArray.push(number & (1 << (bitLength - 1 - i)))
+    }
+    return bitArray
+}
+
+function bitArrayToInt(bit_array) {
+    let num = 0
+    for (let bit of bit_array) {
+        num = (num << 1) | bit
+    }
+    return num
 }
 
 module.exports = {
