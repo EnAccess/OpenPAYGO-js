@@ -7,7 +7,6 @@ describe('OpenPAYGOTokenEncoder test', () => {
 
         sample.forEach((s) => {
             const data = s
-
             try {
                 const { finalToken } = encoder.generateToken({
                     tokenType: data.token_type,
@@ -16,6 +15,7 @@ describe('OpenPAYGOTokenEncoder test', () => {
                     startingCode: data.starting_code,
                     restrictDigitSet: data.restricted_digit_set,
                     value: data.value_raw,
+                    extendToken: false,
                 })
 
                 expect(finalToken).toBe(data.token)

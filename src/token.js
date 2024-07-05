@@ -70,14 +70,7 @@ class OpenPAYGOTokenShared {
     }
 
     static convertFrom4digitToken(token) {
-        // 4 - digit token value
-        let bitArray = []
-        for (let digit of token.toString()) {
-            digit = Number(digit) - 1
-            const tempArr = bitArrayFromInt(digit, 2)
-            bitArray = bitArray.concat(tempArr)
-        }
-        return bitArrayToInt(bitArray)
+        return convertFrom4digitToken(token)
     }
 
     static genStartingCode(key) {
@@ -85,17 +78,96 @@ class OpenPAYGOTokenShared {
         return this.convertHash2Token(hash)
     }
 
-    static convertToNdigitToken(token, digit = 4) {
-        // token should be a number data type
-        let restrictedDigitToken = ''
-        let bitArray = bitArrayFromInt(token, digit * 2)
+    static convertToNdigitToken(token, digit = 15) {
+        return convertToNdigitToken(token, digit)
+    }
 
-        for (let i = 0; i < digit; i++) {
-            restrictedDigitToken += bitArrayToInt(
-                bitArray.slice(i * 2, i * 2 + 2)
-            ).toString()
+    static genHash({ key, msg }) {
+        let buf
+        if (typeof key === 'object') {
+            buf = key
+        } else {
+            buf = bigintConversion.hexToBuf(key)
         }
-        return Number(restrictedDigitToken)
+        const arrayBuffer = buf.buffer.slice(
+            buf.byteOffset,
+            buf.byteOffset + buf.byteLength
+        )
+        const uint32Array = new Uint32Array(arrayBuffer)
+        const hash = siphash24.hash_hex(uint32Array, msg)
+
+        return hash
+    }
+}
+
+class OpenPAYGOTokenSharedExtended {
+    static MAX_BASE_EXTENDED = 999999
+    static MAX_ACTIVATION_VALUE_EXTENDED = 999999
+    static TOKEN_VALUE_OFFSET_EXTENDED = 1000000
+
+    constructor() {}
+
+    static getTokenBase(code) {
+        return code % this.TOKEN_VALUE_OFFSET_EXTENDED
+    }
+
+    static putBaseInToken(token, tokenBase) {
+        if (tokenBase > this.MAX_BASE_EXTENDED) {
+            throw new Error('Invalid token base value')
+        }
+        return token - this.getTokenBase(token) + tokenBase
+    }
+
+    static genNextToken(prev_token, key) {
+        const conformedToken = Buffer.alloc(4) // Allocate buffer of 4 bytes
+        conformedToken.writeUInt32BE(prev_token, 0) // Write the integer value into buffer as big-endian
+
+        // Duplicate the buffer by concatenating it with itself
+        const duplicatedToken = Buffer.concat([conformedToken, conformedToken])
+        let hash = this.genHash({
+            key: key,
+            msg: duplicatedToken,
+            asByte: true,
+        })
+
+        return this.convertHash2Token(hash)
+    }
+
+    static convertHash2Token(hash) {
+        // convert hash from hex
+
+        const hashBuffer = bigintConversion.hexToBuf(hash)
+
+        const dView = new DataView(
+            hashBuffer.buffer,
+            hashBuffer.byteOffset,
+            hashBuffer.byteLength
+        )
+
+        // take first 4 btypes
+        const hash_msb = dView.getUint32(0) // as big endian
+        // take last 4 bytes
+        const hash_lsb = dView.getUint32(4) // as big endian
+
+        const hashUnit = (hash_msb ^ hash_lsb) >>> 0
+        const token = this.convertTo29_5_bits(hashUnit)
+        return token
+    }
+
+    static convertTo29_5_bits(hash_uint) {
+        // port from original lib
+        const mask = ((1 << (64 - 24 + 1)) - 1) << 24
+        let temp = (hash_uint & mask) >>> 24
+        if (temp > 999999999999) temp = temp - 99511627777
+        return temp
+    }
+
+    static convertFrom4digitToken(token) {
+        return convertFrom4digitToken(token)
+    }
+
+    static convertToNdigitToken(token, digit = 20) {
+        return convertToNdigitToken(token, digit)
     }
 
     static genHash({ key, msg }) {
@@ -119,7 +191,7 @@ class OpenPAYGOTokenShared {
 function bitArrayFromInt(number, bitLength) {
     let bitArray = []
     for (let i = 0; i < bitLength; i++) {
-        bitArray.push(number & (1 << (bitLength - 1 - i)))
+        bitArray.push((number & (1 << (bitLength - 1 - i))) !== 0)
     }
     return bitArray
 }
@@ -132,6 +204,31 @@ function bitArrayToInt(bit_array) {
     return num
 }
 
+function convertFrom4digitToken(token) {
+    // 4 - digit token value
+    let bitArray = []
+    for (let digit of token.toString()) {
+        digit = Number(digit) - 1
+        const tempArr = bitArrayFromInt(digit, 2)
+        bitArray = bitArray.concat(tempArr)
+    }
+    return bitArrayToInt(bitArray)
+}
+
+function convertToNdigitToken(token, digit = 4) {
+    // token should be a number data type
+    let restrictedDigitToken = ''
+    let bitArray = bitArrayFromInt(token, digit * 2)
+
+    for (let i = 0; i < digit; i++) {
+        restrictedDigitToken += (
+            bitArrayToInt(bitArray.slice(i * 2, i * 2 + 2)) + 1
+        ).toString()
+    }
+    return parseInt(restrictedDigitToken, 10)
+}
+
 module.exports = {
     OpenPAYGOTokenShared: OpenPAYGOTokenShared,
+    OpenPAYGOTokenSharedExtended: OpenPAYGOTokenSharedExtended,
 }

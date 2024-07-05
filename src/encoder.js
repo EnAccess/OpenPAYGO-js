@@ -2,6 +2,7 @@
 
 const TokenTypes = require('./constants').TokenTypes
 const shared = require('./token').OpenPAYGOTokenShared
+const sharedExtended = require('./token').OpenPAYGOTokenSharedExtended
 
 class OpenPAYGOTokenEncoder {
     constructor() {}
@@ -29,7 +30,10 @@ class OpenPAYGOTokenEncoder {
                 throw new Error("'value' argument is undefined.")
             }
             value = Math.round(value * valueDivider)
-            if (value > shared.MAX_ACTIVATION_VALUE) {
+            const maxValue = extendToken
+                ? sharedExtended.MAX_ACTIVATION_VALUE_EXTENDED
+                : shared.MAX_ACTIVATION_VALUE
+            if (value > maxValue) {
                 throw new Error('The value provided is too high.')
             }
         } else if (value !== undefined) {
@@ -44,6 +48,16 @@ class OpenPAYGOTokenEncoder {
             }
         }
 
+        if (extendToken) {
+            return this.generateExtendedToken({
+                startingCode: startingCode,
+                key: secretKeyHex,
+                count: count,
+                value: value,
+                mode: tokenType,
+                restrictDigitSet: restrictDigitSet,
+            })
+        }
         return this.generateStandardToken({
             startingCode: startingCode,
             key: secretKeyHex,
@@ -73,10 +87,46 @@ class OpenPAYGOTokenEncoder {
         let finalToken = shared.putBaseInToken(currentToken, tokenBase)
 
         if (restrictDigitSet) {
-            finalToken = shared.convertToNdigitToken(finalToken)
+            finalToken = shared.convertToNdigitToken(
+                finalToken,
+                15
+            )
             finalToken = String(finalToken).padStart(15, '0')
         } else {
             finalToken = String(finalToken).padStart(9, '0')
+        }
+        return {
+            newCount,
+            finalToken,
+        }
+    }
+
+    generateExtendedToken({
+        startingCode = undefined,
+        key = undefined,
+        value = undefined,
+        count = undefined,
+        mode = TokenTypes.ADD_TIME,
+        restrictDigitSet = false,
+    }) {
+        const startingBaseCode = sharedExtended.getTokenBase(startingCode)
+        const tokenBase = this.encodeBase(startingBaseCode, value)
+        let currentToken = sharedExtended.putBaseInToken(
+            startingCode,
+            tokenBase
+        )
+        const newCount = this.getNewCount(count, mode)
+
+        for (let i = 0; i < newCount - 1; i++) {
+            currentToken = sharedExtended.genNextToken(currentToken, key)
+        }
+        let finalToken = sharedExtended.putBaseInToken(currentToken, tokenBase)
+
+        if (restrictDigitSet) {
+            finalToken = sharedExtended.convertToNdigitToken(finalToken)
+            finalToken = String(finalToken).padStart(20, '0')
+        } else {
+            finalToken = String(finalToken).padStart(12, '0')
         }
         return {
             newCount,
