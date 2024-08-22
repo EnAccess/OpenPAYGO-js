@@ -1,4 +1,4 @@
-name: Publish to NPM (test)
+name: Publish to NPM
 
 on:
   release:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  run:
+  release-publish:
     runs-on: ubuntu-latest
     permissions:
       contents: read
