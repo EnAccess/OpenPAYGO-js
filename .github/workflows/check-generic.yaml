@@ -16,8 +16,8 @@ jobs:
     name: Run editorconfig-checker
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+
       - name: Run editorconfig-checker
         run: docker run --rm --volume=$PWD:/check mstruebing/editorconfig-checker
 
@@ -25,8 +25,8 @@ jobs:
     name: Run markdownlint
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+
       - name: Run markdownlint-cli2
         uses: DavidAnson/markdownlint-cli2-action@v16
 
@@ -34,7 +34,7 @@ jobs:
     name: Run yamllint
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+
       - name: Run yamllint
         run: yamllint .

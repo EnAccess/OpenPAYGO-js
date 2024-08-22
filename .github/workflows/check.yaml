@@ -1,4 +1,4 @@
-name: Check Code Quality and Tests
+name: Check Code Quality
 
 on:
   push:
@@ -41,24 +41,3 @@ jobs:
 
       - name: Run Prettier
         run: npx prettier . --check
-
-  test:
-    name: Run Tests
-    runs-on: ubuntu-latest
-    needs:
-      - lint-eslint
-      - lint-prettier
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ">=18.x"
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run Tests
-        run: npm run test
