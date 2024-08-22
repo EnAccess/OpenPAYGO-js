@@ -1,7 +1,7 @@
 {
   "name": "openpaygo",
   "version": "0.0.1",
-  "description": "OpenPAYGO library in Javascript",
+  "description": "OpenPAYGO Javascript library",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/EnAccess/OpenPAYGO-js/issues"
   },
-  "homepage": "https://github.com/EnAccess/OpenPAYGO-js#readme",
+  "homepage": "https://enaccess.github.io/OpenPAYGO-docs/",
   "devDependencies": {
     "@eslint/js": "^9.2.0",
     "@types/jest": "^29.5.12",
