@@ -40,28 +40,28 @@ A minimum expected outcome, however, is: One draft of a library in one additiona
 
 A non-exclusive list would look like this
 
-1. Extracting test cases for all Token modes from the Python library (https://github.com/EnAccess/OpenPAYGO-Token/tree/main/tests)
+1. Extracting test cases for all Token modes from the [Python library](https://github.com/EnAccess/OpenPAYGO-Token/tree/main/tests)
 2. Implement the OpenPAYGO Token algorithm in JavaScript
 3. Add test cases based on the result of 1.
 4. Integrate CI/CD pipeline to release the library to NPM
 
-**Bonus outcome:** If the chosen language is JavaScript: Create a small static (!) website which can be used to generate OpenPAYGO Tokens for a testing use-case. The result should be similar to the example from Victron: https://payg.victronenergy.com/ (however Tokens should be computed client side, not server side like in the Victron case).
+**Bonus outcome:** If the chosen language is JavaScript: Create a small static (!) website which can be used to generate OpenPAYGO Tokens for a testing use-case. The result should be similar to the example from Victron: <https://payg.victronenergy.com/> (however Tokens should be computed client side, not server side like in the Victron case).
 
 ## Getting Started
 
-- Join the OSEAS24 Discord server: https://community.oseas.org/
+- Join the OSEAS24 Discord server: <https://community.oseas.org/>
 - Introduce yourself in #introductions channel and join this topic’s channel
 - Confirm you have access to the following Repos
-  - https://github.com/EnAccess/OpenPAYGO-js
-  - https://github.com/EnAccess/OpenPAYGO-php
+  - <https://github.com/EnAccess/OpenPAYGO-js>
+  - <https://github.com/EnAccess/OpenPAYGO-php>
 - For physical participants: Bring a computer (and required Adapters) for some hacking 🤖🧑‍💻
 - Read the documentation
-  - https://enaccess.github.io/OpenPAYGO-docs/
-  - https://www.paygops.com/openpaygotoken
+  - <https://enaccess.github.io/OpenPAYGO-docs/>
+  - <https://www.paygops.com/openpaygotoken>
 
 Contact person(s): Vivien / Daniel
 
 ## Further information and resources
 
-- https://github.com/EnAccess/OpenPAYGO-python/issues/11
-- https://github.com/EnAccess/OpenPAYGO-python/issues/12
+- <https://github.com/EnAccess/OpenPAYGO-python/issues/11>
+- <https://github.com/EnAccess/OpenPAYGO-python/issues/12>
