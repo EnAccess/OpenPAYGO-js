@@ -29,7 +29,7 @@
 
 ---
 
-# OpenPAYGO - JavaScript Lib
+# OpenPAYGO - JavaScript library
 
 This repository contains the **JavaScript** implementions of different OpenPAYGO technologies to run on your server or device.
 
@@ -46,6 +46,19 @@ Device side tasks
 ## Documentation
 
 OpenPAYGO documentation is hosted on [https://enaccess.github.io/OpenPAYGO-docs/](https://enaccess.github.io/OpenPAYGO-docs/).
+
+## OpenPAYGO ecosystem feature availabilties
+
+The OpenPAYGO ecosystem offers a range of feautres to implement pay-as-you-go services.
+These features are implemented in different programming language libraries individually.
+Not all libraries have implemented the full range of features yet.
+
+The **OpenPAYGO JavaScript library** supports the following features:
+
+| Feature           | Status               |
+| ----------------- | -------------------- |
+| OpenPAYGO Token   | ✅ (stable)          |
+| OpenPAYGO Metrics | ❌ (not implemented) |
 
 ## Support
 
