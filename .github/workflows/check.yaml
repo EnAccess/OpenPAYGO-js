@@ -39,11 +39,8 @@ jobs:
         with:
           node-version: ">=18.x"
 
-      - name: Install dependencies
-        run: npm install
-
       - name: Run Prettier
-        run: npm run prettier
+        run: npx prettier . --check
 
   test:
     name: Run Tests
