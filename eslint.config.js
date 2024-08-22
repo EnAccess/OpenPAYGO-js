@@ -1,15 +1,15 @@
-const js = require('@eslint/js')
+const js = require("@eslint/js")
 
 module.exports = [
-    js.configs.recommended,
+  js.configs.recommended,
 
-    {
-        rules: {
-            'no-unused-vars': 'off',
-            'no-undef': 'off',
-        },
+  {
+    rules: {
+      "no-unused-vars": "off",
+      "no-undef": "off",
     },
-    {
-        ignores: ['test/*', 'lib/*'],
-    },
+  },
+  {
+    ignores: ["test/*", "lib/*"],
+  },
 ]
