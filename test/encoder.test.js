@@ -1,7 +1,7 @@
 const sample = require("./sample_tokens.json")
 const Encoder = require("../src/encoder").OpenPAYGOTokenEncoder
 const shared = require("../src/token").OpenPAYGOTokenShared
-const token = require('openpaygo')
+
 describe("OpenPAYGOTokenEncoder test", () => {
   test("generateToken", () => {
     const encoder = new Encoder()
