@@ -84,6 +84,7 @@ class OpenPAYGOTokenEncoder {
     for (let i = 0; i < newCount - 1; i++) {
       currentToken = shared.genNextToken(currentToken, key)
     }
+
     let finalToken = shared.putBaseInToken(currentToken, tokenBase)
 
     if (restrictDigitSet) {
@@ -107,11 +108,12 @@ class OpenPAYGOTokenEncoder {
     restrictDigitSet = false,
   }) {
     const startingBaseCode = sharedExtended.getTokenBase(startingCode)
-    const tokenBase = this.#encodeBase(startingBaseCode, value)
+    const tokenBase = this.#encodeBaseExtended(startingBaseCode, value)
+
     let currentToken = sharedExtended.putBaseInToken(startingCode, tokenBase)
     const newCount = this.#getNewCount(count, mode)
 
-    for (let i = 0; i < newCount - 1; i++) {
+    for (let i = 0; i < newCount; i++) {
       currentToken = sharedExtended.genNextToken(currentToken, key)
     }
     let finalToken = sharedExtended.putBaseInToken(currentToken, tokenBase)
@@ -131,6 +133,16 @@ class OpenPAYGOTokenEncoder {
   #encodeBase(baseCode, value) {
     if (value + baseCode > 999) {
       return value + baseCode - 1000
+    }
+    return value + baseCode
+  }
+
+  #encodeBaseExtended(baseCode, value) {
+    BigInt(value) + BigInt(baseCode)
+    baseCode = BigInt(baseCode)
+    value = BigInt(value)
+    if (value + baseCode > 999999n) {
+      return value + baseCode - 1000000
     }
     return value + baseCode
   }

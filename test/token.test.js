@@ -32,6 +32,6 @@ describe("OpenPAYGOTokenShared test", () => {
 
   test("OpenPAYGOTokenShared convertToNdigitToken", () => {
     const token = 854849256
-    expect(tokenLib.convertToNdigitToken(token, 15)).toBe(413441444234331)
+    expect(tokenLib.convertToNdigitToken(token, 15)).toBe("413441444234331")
   })
 })
