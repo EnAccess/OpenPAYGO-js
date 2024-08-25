@@ -92,7 +92,7 @@ const { value, tokenType, count, updatedCounts } = decoder.decodeToken({
 
 console.log(value) // decoded token value
 console.log(count) // decoded token count
-console.log(tokenType) // decoded token type 
+console.log(tokenType) // decoded token type
 console.log(updatedCounts) // decoder token update count
 ```
 
