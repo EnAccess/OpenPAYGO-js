@@ -48,7 +48,7 @@ Device side tasks
 Install via NPM (browser/nodejs)
 
 ```bash
-$ npm i openpaygo
+npm i openpaygo
 ```
 
 ## Usage
