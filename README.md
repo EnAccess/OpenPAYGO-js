@@ -43,6 +43,59 @@ Device side tasks
 - decoding OpenPAYGO tokens
 - generating OpenPAYGO metrics payloads
 
+## Installation
+
+Install via NPM (browser/nodejs)
+
+```bash
+npm i openpaygo
+```
+
+## Usage
+
+Generate normal or extended tokens
+
+```javascript
+// initialize token encoder
+const encoder = new require("openpaygo").Encoder()
+
+// generate normal or extended token using generateToken function
+const { finalToken, newCount } = encoder.generateToken({
+  tokenType: 1,
+  secretKeyHex: "bc41ec9530f6dac86b1a29ab82edc5fb",
+  count: 3,
+  startingCode: 516959010,
+  restrictDigitSet: false,
+  value: 1,
+  extendToken: false,
+})
+
+console.log("generated token ", finalToken)
+console.log("next token count ", newCount)
+```
+
+Decode tokens using token decoder
+
+```javascript
+// initialize token decoder
+const decoder = new require("openpaygo").Decoder()
+
+// decord token (type, value, count, updated_counts) using decodeToken function
+const { value, tokenType, count, updatedCounts } = decoder.decodeToken({
+  token: "380589011",
+  secretKeyHex: "bc41ec9530f6dac86b1a29ab82edc5fb",
+  count: 3,
+  usedCounts: [],
+  startingCode: 516959010,
+  restrictedDigitSet: false,
+})
+
+console.log(value) // decoded token value
+console.log(count) // decoded token count
+console.log(tokenType) // decoded token type
+console.log(updatedCounts) // decoder token update count
+```
+
 ## Documentation
 
 OpenPAYGO documentation is hosted on [https://enaccess.github.io/OpenPAYGO-docs/](https://enaccess.github.io/OpenPAYGO-docs/).
