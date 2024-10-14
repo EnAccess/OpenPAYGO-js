@@ -96,7 +96,6 @@ console.log(tokenType) // decoded token type
 console.log(updatedCounts) // decoder token update count
 ```
 
-
 ## Documentation
 
 OpenPAYGO documentation is hosted on [https://enaccess.github.io/OpenPAYGO-docs/](https://enaccess.github.io/OpenPAYGO-docs/).
