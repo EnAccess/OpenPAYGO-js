@@ -35,12 +35,12 @@ This repository contains the **JavaScript** implementions of different OpenPAYGO
 
 Server-side tasks include
 
-- generating OpenPAYGO tokens
+- generating OpenPAYGO tokens (normal and extended)
 - decoding OpenPAYGO metrics payloads
 
 Device side tasks
 
-- decoding OpenPAYGO tokens
+- decoding OpenPAYGO tokens (normal and extended)
 - generating OpenPAYGO metrics payloads
 
 ## Installation
