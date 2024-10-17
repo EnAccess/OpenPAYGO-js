@@ -1,7 +1,7 @@
 "use strict"
 
 const bigintConversion = require("bigint-conversion")
-const siphash24 = require("siphash")
+const siphash24 = require("./lib/siphash")
 const Buffer = require("buffer/").Buffer
 
 class OpenPAYGOTokenShared {
@@ -43,13 +43,9 @@ class OpenPAYGOTokenShared {
   static convertHash2Token(hash) {
     // convert hash from hex
 
-    const hashBuffer = bigintConversion.hexToBuf(hash)
+    const hashBuffer = bigintConversion.hexToBuf(hash, true)
 
-    const dView = new DataView(
-      hashBuffer.buffer,
-      hashBuffer.byteOffset,
-      hashBuffer.byteLength
-    )
+    const dView = new DataView(hashBuffer)
 
     // take first 4 btypes
     const hash_msb = dView.getUint32(0) // as big endian
@@ -85,14 +81,14 @@ class OpenPAYGOTokenShared {
   static genHash({ key, msg }) {
     let buf
     if (typeof key === "object") {
-      buf = key
+      buf = key.buffer
     } else {
-      buf = bigintConversion.hexToBuf(key)
+      buf = bigintConversion.hexToBuf(key, true)
     }
-    const arrayBuffer = buf.buffer.slice(
-      buf.byteOffset,
-      buf.byteOffset + buf.byteLength
-    )
+
+    const uint32View = new Uint32Array(buf)
+
+    const arrayBuffer = buf.slice(0, uint32View.byteLength)
     const uint32Array = new Uint32Array(arrayBuffer)
     const hash = siphash24.hash_hex(uint32Array, msg)
 
@@ -136,13 +132,9 @@ class OpenPAYGOTokenSharedExtended {
   static convertHash2Token(hash) {
     // convert hash from hex
 
-    const hashBuffer = bigintConversion.hexToBuf(hash)
+    const hashBuffer = bigintConversion.hexToBuf(hash, true)
 
-    const dView = new DataView(
-      hashBuffer.buffer,
-      hashBuffer.byteOffset,
-      hashBuffer.byteLength
-    )
+    const dView = new DataView(hashBuffer)
 
     // take first 4 btypes
     const hash_msb = dView.getUint32(0) // as big endian
@@ -173,14 +165,13 @@ class OpenPAYGOTokenSharedExtended {
   static genHash({ key, msg }) {
     let buf
     if (typeof key === "object") {
-      buf = key
+      buf = key.buffer
     } else {
-      buf = bigintConversion.hexToBuf(key)
+      buf = bigintConversion.hexToBuf(key, true)
     }
-    const arrayBuffer = buf.buffer.slice(
-      buf.byteOffset,
-      buf.byteOffset + buf.byteLength
-    )
+    const uint32View = new Uint32Array(buf)
+
+    const arrayBuffer = buf.slice(0, uint32View.byteLength)
     const uint32Array = new Uint32Array(arrayBuffer)
     const hash = siphash24.hash_hex(uint32Array, msg)
 
