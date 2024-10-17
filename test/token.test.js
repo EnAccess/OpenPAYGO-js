@@ -1,5 +1,6 @@
 const tokenLib = require("../src/token").OpenPAYGOTokenShared
 const bigintConversion = require("bigint-conversion")
+const Buffer = require("buffer/").Buffer
 
 describe("OpenPAYGOTokenShared test", () => {
   test("OpenPAYGOTokenShared genHash", () => {
