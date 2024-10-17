@@ -10,6 +10,7 @@ To run the development server, follow these steps:
    ```bash
    git clone https://github.com/EnAccess/OpenPAYGO-js
    cd website 
+   
    ```
 
 2. Install the dependencies:
