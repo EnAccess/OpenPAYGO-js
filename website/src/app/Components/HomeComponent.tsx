@@ -2,6 +2,7 @@
 import React, { useState } from "react"
 import { Encoder } from "openpaygo"
 
+
 interface TokenData {
   finalToken: string
   newCount: number
@@ -22,9 +23,8 @@ const HomeComponent: React.FC = () => {
   ): Promise<void> => {
     e.preventDefault()
     setError(null)
-    setResult(null)
+  
 
-    // Debugging: Check if all values are valid before processing
     if (!serialNumber) {
       setError("Serial number is required")
       return
@@ -78,11 +78,13 @@ const HomeComponent: React.FC = () => {
 
       console.log("Generated token:", finalToken)
       console.log("Next token count:", newCount)
+
       setResult({ finalToken, newCount })
     } catch (err) {
+     
       console.error("Error generating token:", err)
       setError(
-        "An error occurred while generating the token. Please check your input and try again."
+        "An error occurred while generating the token."
       )
     }
   }
@@ -90,7 +92,7 @@ const HomeComponent: React.FC = () => {
   return (
     <div className="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
       <h1 className="text-2xl text-blue-600 text-center mb-4">
-        PAYGO Token Generator
+        OpenPAYGO Token Generator
       </h1>
       <form onSubmit={handleSubmit} id="tokenForm">
         <div className="mb-4">
