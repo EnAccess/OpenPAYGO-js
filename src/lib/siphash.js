@@ -164,4 +164,5 @@ var SipHash = (function () {
       string_to_u8: string_to_u8
   };
 })();
-var module = module || {}, exports = module.exports = SipHash;
+
+module = module || {}, exports = module.exports = SipHash;
