@@ -1,1 +1,167 @@
-var SipHash=function(){"use strict";function r(r,n){var t=r.l+n.l,h={h:r.h+n.h+(t/2>>>31)>>>0,l:t>>>0};r.h=h.h,r.l=h.l}function n(r,n){r.h^=n.h,r.h>>>=0,r.l^=n.l,r.l>>>=0}function t(r,n){var t={h:r.h<<n|r.l>>>32-n,l:r.l<<n|r.h>>>32-n};r.h=t.h,r.l=t.l}function h(r){var n=r.l;r.l=r.h,r.h=n}function e(e,l,o,u){r(e,l),r(o,u),t(l,13),t(u,16),n(l,e),n(u,o),h(e),r(o,l),r(e,u),t(l,17),t(u,21),n(l,o),n(u,e),h(o)}function l(r,n){return r[n+3]<<24|r[n+2]<<16|r[n+1]<<8|r[n]}function o(r,t){"string"==typeof t&&(t=u(t));var h={h:r[1]>>>0,l:r[0]>>>0},o={h:r[3]>>>0,l:r[2]>>>0},i={h:h.h,l:h.l},a=h,f={h:o.h,l:o.l},c=o,s=t.length,v=s-7,g=new Uint8Array(new ArrayBuffer(8));n(i,{h:1936682341,l:1886610805}),n(f,{h:1685025377,l:1852075885}),n(a,{h:1819895653,l:1852142177}),n(c,{h:1952801890,l:2037671283});for(var y=0;y<v;){var d={h:l(t,y+4),l:l(t,y)};n(c,d),e(i,f,a,c),e(i,f,a,c),n(i,d),y+=8}g[7]=s;for(var p=0;y<s;)g[p++]=t[y++];for(;p<7;)g[p++]=0;var w={h:g[7]<<24|g[6]<<16|g[5]<<8|g[4],l:g[3]<<24|g[2]<<16|g[1]<<8|g[0]};n(c,w),e(i,f,a,c),e(i,f,a,c),n(i,w),n(a,{h:0,l:255}),e(i,f,a,c),e(i,f,a,c),e(i,f,a,c),e(i,f,a,c);var _=i;return n(_,f),n(_,a),n(_,c),_}function u(r){if("function"==typeof TextEncoder)return(new TextEncoder).encode(r);r=unescape(encodeURIComponent(r));for(var n=new Uint8Array(r.length),t=0,h=r.length;t<h;t++)n[t]=r.charCodeAt(t);return n}return{hash:o,hash_hex:function(r,n){var t=o(r,n);return("0000000"+t.h.toString(16)).substr(-8)+("0000000"+t.l.toString(16)).substr(-8)},hash_uint:function(r,n){var t=o(r,n);return 4294967296*(2097151&t.h)+t.l},string16_to_key:function(r){var n=u(r);if(16!==n.length)throw Error("Key length must be 16 bytes");var t=new Uint32Array(4);return t[0]=l(n,0),t[1]=l(n,4),t[2]=l(n,8),t[3]=l(n,12),t},string_to_u8:u}}(),module=module||{},exports=module.exports=SipHash;
+var SipHash = (function () {
+  "use strict";
+  function _add(a, b) {
+      var rl = a.l + b.l, a2 = {
+          h: a.h + b.h + (rl / 2 >>> 31) >>> 0,
+          l: rl >>> 0
+      };
+      a.h = a2.h;
+      a.l = a2.l;
+  }
+  function _xor(a, b) {
+      a.h ^= b.h;
+      a.h >>>= 0;
+      a.l ^= b.l;
+      a.l >>>= 0;
+  }
+  function _rotl(a, n) {
+      var a2 = {
+          h: a.h << n | a.l >>> (32 - n),
+          l: a.l << n | a.h >>> (32 - n)
+      };
+      a.h = a2.h;
+      a.l = a2.l;
+  }
+  function _rotl32(a) {
+      var al = a.l;
+      a.l = a.h;
+      a.h = al;
+  }
+  function _compress(v0, v1, v2, v3) {
+      _add(v0, v1);
+      _add(v2, v3);
+      _rotl(v1, 13);
+      _rotl(v3, 16);
+      _xor(v1, v0);
+      _xor(v3, v2);
+      _rotl32(v0);
+      _add(v2, v1);
+      _add(v0, v3);
+      _rotl(v1, 17);
+      _rotl(v3, 21);
+      _xor(v1, v2);
+      _xor(v3, v0);
+      _rotl32(v2);
+  }
+  function _get_int(a, offset) {
+      return a[offset + 3] << 24 |
+          a[offset + 2] << 16 |
+          a[offset + 1] << 8 |
+          a[offset];
+  }
+  function hash(key, m) {
+      if (typeof m === "string") {
+          m = string_to_u8(m);
+      }
+      var k0 = {
+          h: key[1] >>> 0,
+          l: key[0] >>> 0
+      }, k1 = {
+          h: key[3] >>> 0,
+          l: key[2] >>> 0
+      }, v0 = {
+          h: k0.h,
+          l: k0.l
+      }, v2 = k0, v1 = {
+          h: k1.h,
+          l: k1.l
+      }, v3 = k1, ml = m.length, ml7 = ml - 7, buf = new Uint8Array(new ArrayBuffer(8));
+      _xor(v0, {
+          h: 0x736f6d65,
+          l: 0x70736575
+      });
+      _xor(v1, {
+          h: 0x646f7261,
+          l: 0x6e646f6d
+      });
+      _xor(v2, {
+          h: 0x6c796765,
+          l: 0x6e657261
+      });
+      _xor(v3, {
+          h: 0x74656462,
+          l: 0x79746573
+      });
+      var mp = 0;
+      while (mp < ml7) {
+          var mi = {
+              h: _get_int(m, mp + 4),
+              l: _get_int(m, mp)
+          };
+          _xor(v3, mi);
+          _compress(v0, v1, v2, v3);
+          _compress(v0, v1, v2, v3);
+          _xor(v0, mi);
+          mp += 8;
+      }
+      buf[7] = ml;
+      var ic = 0;
+      while (mp < ml) {
+          buf[ic++] = m[mp++];
+      }
+      while (ic < 7) {
+          buf[ic++] = 0;
+      }
+      var mil = {
+          h: buf[7] << 24 | buf[6] << 16 | buf[5] << 8 | buf[4],
+          l: buf[3] << 24 | buf[2] << 16 | buf[1] << 8 | buf[0]
+      };
+      _xor(v3, mil);
+      _compress(v0, v1, v2, v3);
+      _compress(v0, v1, v2, v3);
+      _xor(v0, mil);
+      _xor(v2, {
+          h: 0,
+          l: 0xff
+      });
+      _compress(v0, v1, v2, v3);
+      _compress(v0, v1, v2, v3);
+      _compress(v0, v1, v2, v3);
+      _compress(v0, v1, v2, v3);
+      var h = v0;
+      _xor(h, v1);
+      _xor(h, v2);
+      _xor(h, v3);
+      return h;
+  }
+  function hash_hex(key, m) {
+      var r = hash(key, m);
+      return ("0000000" + r.h.toString(16)).substr(-8) +
+          ("0000000" + r.l.toString(16)).substr(-8);
+  }
+  function hash_uint(key, m) {
+      var r = hash(key, m);
+      return (r.h & 0x1fffff) * 0x100000000 + r.l;
+  }
+  function string_to_u8(str) {
+      if (typeof TextEncoder === "function") {
+          return new TextEncoder().encode(str);
+      }
+      str = unescape(encodeURIComponent(str));
+      var bytes = new Uint8Array(str.length);
+      for (var i = 0, j = str.length; i < j; i++) {
+          bytes[i] = str.charCodeAt(i);
+      }
+      return bytes;
+  }
+  function string16_to_key(str) {
+      var u8 = string_to_u8(str);
+      if (u8.length !== 16) {
+          throw Error("Key length must be 16 bytes");
+      }
+      var key = new Uint32Array(4);
+      key[0] = _get_int(u8, 0);
+      key[1] = _get_int(u8, 4);
+      key[2] = _get_int(u8, 8);
+      key[3] = _get_int(u8, 12);
+      return key;
+  }
+  return {
+      hash: hash,
+      hash_hex: hash_hex,
+      hash_uint: hash_uint,
+      string16_to_key: string16_to_key,
+      string_to_u8: string_to_u8
+  };
+})();
+var module = module || {}, exports = module.exports = SipHash;
