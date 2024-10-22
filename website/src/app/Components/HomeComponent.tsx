@@ -89,6 +89,13 @@ const HomeComponent: React.FC = () => {
     }
   }
 
+  const commandOptions: { [key: number]: string } = {
+    1: "add_time - Add PAYG time",
+    2: "set_time - Set PAYG time",
+    3: "disable_payg - Disable PAYG",
+    4: "counter_sync - Counter sync",
+  }
+
   return (
     <div className="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
       <h1 className="text-2xl text-blue-600 text-center mb-4">
@@ -242,7 +249,7 @@ const HomeComponent: React.FC = () => {
                     {serialNumber}
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
-                    {commandArgument}
+                    {commandOptions[commandArgument || 0]}
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
                     {result.finalToken || "N/A"}
