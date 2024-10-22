@@ -1,6 +1,6 @@
 {
   "name": "openpaygo",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "OpenPAYGO Javascript library",
   "main": "index.js",
   "scripts": {
@@ -32,7 +32,6 @@
   },
   "dependencies": {
     "bigint-conversion": "^2.4.3",
-    "buffer": "^6.0.3",
-    "siphash": "^1.1.0"
+    "buffer": "^6.0.3"
   }
 }
