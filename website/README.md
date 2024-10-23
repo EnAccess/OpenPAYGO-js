@@ -1,22 +1,22 @@
 # PAYGO Token Generator
 
-This project is a **OpenPAYGO Token Generator** built with **Next.js**. It allows users to generate tokens for OpenPAYGO  using specific parameters such as serial number, counter, starting code and private key. The application provides a user-friendly interface to input these parameters and generates a token based on the provided data.
+This project is a **OpenPAYGO Token Generator** built with **Next.js**. It allows users to generate tokens for OpenPAYGO using specific parameters such as serial number, counter, starting code, and private key. The application provides a user-friendly interface to input these parameters and generates a token based on the provided data.
 
 ## Getting Started
 
 To run the development server, follow these steps:
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/EnAccess/OpenPAYGO-js
-   cd website 
-   
-   ```
+   cd website
+
 
 2. Install the dependencies:
    ```bash
    npm install
-   ```
+   
 
 3. Run the development server:
    ```bash
@@ -25,7 +25,7 @@ To run the development server, follow these steps:
    yarn dev
    # or
    pnpm dev
-   ```
+   
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application in action.
 
