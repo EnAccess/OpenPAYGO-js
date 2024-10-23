@@ -14,6 +14,7 @@ const HomeComponent: React.FC = () => {
   const [startingCode, setStartingCode] = useState<number | null>(null)
   const [privateKey, setPrivateKey] = useState<string>("")
   const [commandArgument, setCommandArgument] = useState<number | null>(null)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [timeGranularity, setTimeGranularity] = useState<number | null>(null)
   const [result, setResult] = useState<TokenData | null>(null)
   const [error, setError] = useState<string | null>(null)
