@@ -2,7 +2,6 @@
 import React, { useState } from "react"
 import { Encoder } from "openpaygo"
 
-
 interface TokenData {
   finalToken: string
   newCount: number
@@ -24,7 +23,6 @@ const HomeComponent: React.FC = () => {
   ): Promise<void> => {
     e.preventDefault()
     setError(null)
-  
 
     if (!serialNumber) {
       setError("Serial number is required")
@@ -49,7 +47,6 @@ const HomeComponent: React.FC = () => {
 
     const encoder = new Encoder()
     try {
-     
       console.log({
         serialNumber,
         counter,
@@ -82,11 +79,8 @@ const HomeComponent: React.FC = () => {
 
       setResult({ finalToken, newCount })
     } catch (err) {
-     
       console.error("Error generating token:", err)
-      setError(
-        "An error occurred while generating the token."
-      )
+      setError("An error occurred while generating the token.")
     }
   }
 
