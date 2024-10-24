@@ -1,11 +1,7 @@
 /** @type {import('next').NextConfig} */
-
-const isProd = process.env.NODE_ENV === "production"
-
 const nextConfig = {
-  // Add leading slash to assetPrefix
-  assetPrefix: isProd ? "/OpenPAYGO-js" : "",
-  basePath: isProd ? "/OpenPAYGO-js" : "",
+  assetPrefix: process.env.NODE_ENV === "production" ? "/OpenPAYGO-js" : "",
+  basePath: process.env.NODE_ENV === "production" ? "/OpenPAYGO-js" : "",
   output: "export",
   trailingSlash: true,
   images: {
@@ -13,4 +9,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+export default nextConfig
