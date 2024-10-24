@@ -3,11 +3,14 @@
 const isProd = process.env.NODE_ENV === "production"
 
 const nextConfig = {
-  assetPrefix: isProd ? "OpenPAYGO-js" : "",
+  // Add leading slash to assetPrefix
+  assetPrefix: isProd ? "/OpenPAYGO-js" : "",
+  basePath: isProd ? "/OpenPAYGO-js" : "",
+  output: "export",
   trailingSlash: true,
   images: {
     unoptimized: true,
   },
 }
 
-export default nextConfig
+module.exports = nextConfig
