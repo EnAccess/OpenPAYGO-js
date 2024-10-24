@@ -32,6 +32,8 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
