@@ -106,7 +106,7 @@ const HomeComponent: React.FC = () => {
           </label>
           <input
             type="text"
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+            className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black"
             id="serialNumber"
             value={serialNumber}
             onChange={(e) => setSerialNumber(e.target.value)}
@@ -123,7 +123,7 @@ const HomeComponent: React.FC = () => {
           </label>
           <input
             type="number"
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+            className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black"
             id="counter"
             value={counter ?? ""}
             onChange={(e) =>
@@ -142,7 +142,7 @@ const HomeComponent: React.FC = () => {
           </label>
           <input
             type="number"
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+            className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black"
             id="startingCode"
             value={startingCode ?? ""}
             onChange={(e) =>
@@ -161,7 +161,7 @@ const HomeComponent: React.FC = () => {
           </label>
           <input
             type="text"
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+            className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black"
             id="privateKey"
             value={privateKey}
             onChange={(e) => setPrivateKey(e.target.value)}
@@ -179,7 +179,7 @@ const HomeComponent: React.FC = () => {
             Command:
           </label>
           <select
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+            className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black"
             id="command"
             value={commandArgument ?? ""}
             onChange={(e) =>
@@ -204,7 +204,7 @@ const HomeComponent: React.FC = () => {
           </label>
           <input
             type="number"
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+            className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black"
             id="commandArgument"
             value={commandArgument ?? ""}
             onChange={(e) =>
