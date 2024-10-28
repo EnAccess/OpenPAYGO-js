@@ -41,3 +41,18 @@ jobs:
 
       - name: Run Prettier
         run: npx prettier . --check
+
+  typedef-check:
+    name: Type Definition Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ">=18.x"
+
+      - name: Run TSD
+        run: npx tsd
