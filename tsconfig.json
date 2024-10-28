@@ -1,14 +1,17 @@
 {
-    "compilerOptions": {
-      "strict": true,
-      "target": "es6",
-      "module": "commonjs",
-      "rootDir": "./",
-      "baseUrl": "./",
-      "paths": {
-        "openpaygo": ["src/types/openpaygo.d.ts"]
-      }
-    },
-    "include": ["src/types", "src/types/openpaygo.test-d.ts", "src/types/openpaygo.d.ts"]
-  }
-  
+  "compilerOptions": {
+    "strict": true,
+    "target": "es6",
+    "module": "commonjs",
+    "rootDir": "./",
+    "baseUrl": "./",
+    "paths": {
+      "openpaygo": ["src/types/openpaygo.d.ts"]
+    }
+  },
+  "include": [
+    "src/types",
+    "src/types/openpaygo.test-d.ts",
+    "src/types/openpaygo.d.ts"
+  ]
+}

@@ -54,5 +54,8 @@ jobs:
         with:
           node-version: ">=18.x"
 
+      - name: Install dependencies
+        run: npm install
+
       - name: Run TSD
         run: npx tsd
