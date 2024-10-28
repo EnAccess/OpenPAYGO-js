@@ -31,7 +31,7 @@ const HomeComponent: React.FC = () => {
     "1": { name: "add_time - Add PAYG time", requiresArgument: true },
     "2": { name: "set_time - Set PAYG time", requiresArgument: true },
     "3": { name: "disable_payg - Disable PAYG", requiresArgument: false },
-    "4": { name: "counter_sync - Counter sync", requiresArgument: false },
+    "4": { name: "counter_sync - Counter sync", requiresArgument: true },
   }
 
   const handleSubmit = async (
