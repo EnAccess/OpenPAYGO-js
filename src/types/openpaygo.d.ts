@@ -1,10 +1,18 @@
-declare module "openpaygo-token" {
-  import { TokenTypes } from "./constants"
-
+declare module "openpaygo" {
+  // available token types
+  export declare enum TokenTypes {
+    ADD_TIME = 1,
+    SET_TIME = 2,
+    DISABLE_PAYG = 3,
+    COUNTER_SYNC = 4,
+    INVALID = 10,
+    ALREADY_USED = 11,
+    PAYG_DISABLE_VALUE = 998,
+  }
   /**
    * Encoder class for generating OpenPAYGO tokens based on various configurations.
    */
-  export class OpenPAYGOTokenEncoder {
+  export class Encoder {
     constructor()
 
     /**
@@ -38,11 +46,7 @@ declare module "openpaygo-token" {
   /**
    * Decoder class for interpreting OpenPAYGO tokens based on various configurations.
    */
-  export class OpenPAYGOTokenDecoder {
-    static MAX_TOKEN_JUMP: number // Maximum allowed token jump
-    static MAX_TOKEN_JUMP_COUNTER_SYNC: number // Max jump for counter sync tokens
-    static MAX_UNUSED_OLDER_TOKENS: number // Max unused older tokens count
-
+  export class Decoder {
     constructor()
     /**
      * Decodes a token with the specified configuration parameters.
