@@ -23,7 +23,6 @@ const HomeComponent: React.FC = () => {
   const [privateKey, setPrivateKey] = useState<string>("")
   const [selectedCommand, setSelectedCommand] = useState<string>("1")
   const [commandArgument, setCommandArgument] = useState<number>(7)
-  const [timeGranularity, setTimeGranularity] = useState<number | null>(null)
   const [result, setResult] = useState<TokenData | null>(null)
   const [error, setError] = useState<string | null>(null)
 
