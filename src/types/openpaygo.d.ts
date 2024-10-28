@@ -1,6 +1,6 @@
 declare module "openpaygo" {
   // available token types
-  export declare enum TokenTypes {
+  export enum TokenTypes {
     ADD_TIME = 1,
     SET_TIME = 2,
     DISABLE_PAYG = 3,
@@ -60,7 +60,7 @@ declare module "openpaygo" {
      * @param params.restrictedDigitSet - Boolean to indicate restricted digits.
      * @returns Object containing value, tokenType, count, and updatedCounts.
      */
-    static decodeToken(params: {
+    decodeToken(params: {
       token: string
       secretKeyHex: string
       count: number
