@@ -6,14 +6,15 @@ describe("OpenPAYGOTokenDecoder test", () => {
   test("decodeToken", () => {
     const data = sample[0]
 
-    const { value, tokenType, count, updatedCounts } = Decorder.decodeToken({
-      token: data.token,
-      secretKeyHex: data.key,
-      count: data.token_count,
-      usedCounts: [],
-      startingCode: data.starting_code,
-      restrictedDigitSet: data.restricted_digit_set,
-    })
+    const { value, tokenType, count, updatedCounts } =
+      new Decorder().decodeToken({
+        token: data.token,
+        secretKeyHex: data.key,
+        count: data.token_count,
+        usedCounts: [],
+        startingCode: data.starting_code,
+        restrictedDigitSet: data.restricted_digit_set,
+      })
 
     expect(value).toBeUndefined()
     expect(count).toBeUndefined()

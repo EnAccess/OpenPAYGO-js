@@ -8,7 +8,9 @@ class OpenPAYGOTokenDecoder {
   static MAX_TOKEN_JUMP_COUNTER_SYNC = 100
   static MAX_UNUSED_OLDER_TOKENS = 8 * 2
 
-  static decodeToken({
+  constructor() {}
+
+  decodeToken({
     token = "",
     secretKeyHex,
     count,
@@ -67,7 +69,7 @@ class OpenPAYGOTokenDecoder {
     // }
 
     var { value, tokenType, newCount, updatedCounts } =
-      this.getActivationValueCountAndTypefromToken({
+      OpenPAYGOTokenDecoder.#getActivationValueCountAndTypefromToken({
         token,
         startingCode,
         keyHex: secretKeyHex,
@@ -88,7 +90,7 @@ class OpenPAYGOTokenDecoder {
     }
   }
 
-  static getActivationValueCountAndTypefromToken({
+  static #getActivationValueCountAndTypefromToken({
     token,
     startingCode,
     keyHex,
@@ -107,7 +109,7 @@ class OpenPAYGOTokenDecoder {
     // obtain base of starting code
     const startCodeBase = shared.getTokenBase(startingCode)
 
-    let value = this.decodeBase(startCodeBase, tokenBase)
+    let value = this.#decodeBase(startCodeBase, tokenBase)
     let maxCountTry
     if (value === TokenTypes.COUNTER_SYNC) {
       maxCountTry = count + this.MAX_TOKEN_JUMP_COUNTER_SYNC + 1
@@ -131,8 +133,8 @@ class OpenPAYGOTokenDecoder {
       }
 
       if (maskedToken === token) {
-        if (this.countIsValid(cnt, count, value, tokenType, usedCounts)) {
-          const updatedCounts = this.updateUsedCounts(
+        if (this.#countIsValid(cnt, count, value, tokenType, usedCounts)) {
+          const updatedCounts = this.#updateUsedCounts(
             usedCounts,
             value,
             cnt,
@@ -166,7 +168,7 @@ class OpenPAYGOTokenDecoder {
     }
   }
 
-  static countIsValid(count, lastCount, value, type, usedCounts) {
+  static #countIsValid(count, lastCount, value, type, usedCounts) {
     if (value === shared.COUNTER_SYNC_VALUE) {
       if (count > lastCount - this.MAX_TOKEN_JUMP) {
         return true
@@ -183,7 +185,7 @@ class OpenPAYGOTokenDecoder {
     return false
   }
 
-  static updateUsedCounts(pastUsedCounts, value, newCount, type) {
+  static #updateUsedCounts(pastUsedCounts, value, newCount, type) {
     if (pastUsedCounts.length) {
       return undefined
     }
@@ -214,7 +216,7 @@ class OpenPAYGOTokenDecoder {
     return usedCounts
   }
 
-  static decodeBase(startCodeBase, tokenBase) {
+  static #decodeBase(startCodeBase, tokenBase) {
     const decodedValue = tokenBase - startCodeBase
     return decodedValue < 0 ? decodedValue + 1000 : decodedValue
   }
