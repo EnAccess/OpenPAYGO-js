@@ -49,7 +49,7 @@ class OpenPAYGOTokenEncoder {
     }
 
     if (extendToken) {
-      return this.generateExtendedToken({
+      return this.#generateExtendedToken({
         startingCode: startingCode,
         key: secretKeyHex,
         count: count,
@@ -58,7 +58,7 @@ class OpenPAYGOTokenEncoder {
         restrictDigitSet: restrictDigitSet,
       })
     }
-    return this.generateStandardToken({
+    return this.#generateStandardToken({
       startingCode: startingCode,
       key: secretKeyHex,
       count: count,
@@ -68,7 +68,7 @@ class OpenPAYGOTokenEncoder {
     })
   }
 
-  generateStandardToken({
+  #generateStandardToken({
     startingCode = undefined,
     key = undefined,
     value = undefined,
@@ -77,9 +77,9 @@ class OpenPAYGOTokenEncoder {
     restrictDigitSet = false,
   }) {
     const startingBaseCode = shared.getTokenBase(startingCode)
-    const tokenBase = this.encodeBase(startingBaseCode, value)
+    const tokenBase = this.#encodeBase(startingBaseCode, value)
     let currentToken = shared.putBaseInToken(startingCode, tokenBase)
-    const newCount = this.getNewCount(count, mode)
+    const newCount = this.#getNewCount(count, mode)
 
     for (let i = 0; i < newCount - 1; i++) {
       currentToken = shared.genNextToken(currentToken, key)
@@ -98,7 +98,7 @@ class OpenPAYGOTokenEncoder {
     }
   }
 
-  generateExtendedToken({
+  #generateExtendedToken({
     startingCode = undefined,
     key = undefined,
     value = undefined,
@@ -107,9 +107,9 @@ class OpenPAYGOTokenEncoder {
     restrictDigitSet = false,
   }) {
     const startingBaseCode = sharedExtended.getTokenBase(startingCode)
-    const tokenBase = this.encodeBase(startingBaseCode, value)
+    const tokenBase = this.#encodeBase(startingBaseCode, value)
     let currentToken = sharedExtended.putBaseInToken(startingCode, tokenBase)
-    const newCount = this.getNewCount(count, mode)
+    const newCount = this.#getNewCount(count, mode)
 
     for (let i = 0; i < newCount - 1; i++) {
       currentToken = sharedExtended.genNextToken(currentToken, key)
@@ -128,14 +128,14 @@ class OpenPAYGOTokenEncoder {
     }
   }
 
-  encodeBase(baseCode, value) {
+  #encodeBase(baseCode, value) {
     if (value + baseCode > 999) {
       return value + baseCode - 1000
     }
     return value + baseCode
   }
 
-  getNewCount(count, mode) {
+  #getNewCount(count, mode) {
     let newCount
     const currCountOdd = count % 2
     if (

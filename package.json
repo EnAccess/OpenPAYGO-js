@@ -3,6 +3,7 @@
   "version": "0.0.5",
   "description": "OpenPAYGO Javascript library",
   "main": "index.js",
+  "types": "src/types/openpaygo-token.d.ts",
   "scripts": {
     "test": "jest",
     "lint": "npx eslint"
