@@ -10,6 +10,7 @@ on:
 
 jobs:
   check-build:
+    name: Check Website build
     runs-on: ubuntu-latest
     defaults:
       run:

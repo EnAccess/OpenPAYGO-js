@@ -43,7 +43,7 @@ jobs:
         run: npx prettier . --check
 
   typedef-check:
-    name: Type Definition Check
+    name: Check Type Definitions
     runs-on: ubuntu-latest
 
     steps:
