@@ -25,3 +25,30 @@ body {
     text-wrap: balance;
   }
 }
+/* Add this to your CSS file */
+.background {
+  background: linear-gradient(to right, #e0f7fa, #ffffff); /* Light blue to white */
+  position: relative;
+  overflow: hidden;
+  padding: 50px 0; /* Adjust padding as needed */
+}
+
+/* Add this to your CSS file */
+.background {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 0; /* Adjust padding as needed */
+  background: linear-gradient(to right, #e0f7fa, #ffffff); /* Light blue to white */
+}
+
+@media (max-width: 768px) {
+  .background {
+    flex-direction: column; /* Stack on smaller screens */
+    align-items: center; /* Center items */
+  }
+  .background img {
+    width: 80%; /* Adjust size for smaller screens */
+    margin-bottom: 20px; /* Space between images and form */
+  }
+}
