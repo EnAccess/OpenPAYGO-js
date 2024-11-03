@@ -83,9 +83,9 @@ const HomeComponent: React.FC = () => {
   return (
     <div className="background flex justify-between items-center font-neuzeit ">
       <img
-        src="svg.svg" 
+        src="svg.svg"
         alt="Left Illustration"
-        className="w-1/3 hidden md:block" 
+        className="w-1/3 hidden md:block"
       />
       <div className="max-w-2xl mx-auto p-6">
         <header className="bg-[#164669] p-4 text-white text-center">
@@ -145,7 +145,9 @@ const HomeComponent: React.FC = () => {
                 id="startingCode"
                 value={startingCode ?? ""}
                 onChange={(e) =>
-                  setStartingCode(e.target.value ? parseInt(e.target.value) : null)
+                  setStartingCode(
+                    e.target.value ? parseInt(e.target.value) : null
+                  )
                 }
                 placeholder="ex: 38"
                 required
@@ -232,10 +234,18 @@ const HomeComponent: React.FC = () => {
                 <table className="min-w-full border border-gray-300 mt-2">
                   <thead>
                     <tr className="bg-gray-100">
-                      <th className="border border-gray-300 px-4 py-2">Serial</th>
-                      <th className="border border-gray-300 px-4 py-2">Command</th>
-                      <th className="border border-gray-300 px-4 py-2">Token</th>
-                      <th className="border border-gray-300 px-4 py-2">Counter</th>
+                      <th className="border border-gray-300 px-4 py-2">
+                        Serial
+                      </th>
+                      <th className="border border-gray-300 px-4 py-2">
+                        Command
+                      </th>
+                      <th className="border border-gray-300 px-4 py-2">
+                        Token
+                      </th>
+                      <th className="border border-gray-300 px-4 py-2">
+                        Counter
+                      </th>
                     </tr>
                   </thead>
                   <tbody>

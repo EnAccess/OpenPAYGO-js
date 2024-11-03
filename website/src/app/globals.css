@@ -27,7 +27,11 @@ body {
 }
 /* Add this to your CSS file */
 .background {
-  background: linear-gradient(to right, #e0f7fa, #ffffff); /* Light blue to white */
+  background: linear-gradient(
+    to right,
+    #e0f7fa,
+    #ffffff
+  ); /* Light blue to white */
   position: relative;
   overflow: hidden;
   padding: 50px 0; /* Adjust padding as needed */
@@ -39,7 +43,11 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 50px 0; /* Adjust padding as needed */
-  background: linear-gradient(to right, #e0f7fa, #ffffff); /* Light blue to white */
+  background: linear-gradient(
+    to right,
+    #e0f7fa,
+    #ffffff
+  ); /* Light blue to white */
 }
 
 @media (max-width: 768px) {
