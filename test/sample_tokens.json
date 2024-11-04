@@ -7,7 +7,19 @@
     "restricted_digit_set": false,
     "token_type": 1,
     "value_raw": 1,
+    "extended_token": false,
     "token": "380589011"
+  },
+  {
+    "serial_number": "TEST220000001",
+    "starting_code": 516959010,
+    "key": "bc41ec9530f6dac86b1a29ab82edc5fb",
+    "token_count": 4,
+    "restricted_digit_set": false,
+    "token_type": 1,
+    "value_raw": 1,
+    "extended_token": true,
+    "token": "584694959011"
   },
   {
     "serial_number": "TEST220000001",
@@ -17,7 +29,19 @@
     "restricted_digit_set": false,
     "token_type": 1,
     "value_raw": 2,
+    "extended_token": false,
     "token": "283675012"
+  },
+  {
+    "serial_number": "TEST220000001",
+    "starting_code": 516959010,
+    "key": "bc41ec9530f6dac86b1a29ab82edc5fb",
+    "token_count": 6,
+    "restricted_digit_set": false,
+    "token_type": 1,
+    "value_raw": 2,
+    "extended_token": true,
+    "token": "093055959012"
   },
   {
     "serial_number": "TEST220000001",
@@ -27,7 +51,19 @@
     "restricted_digit_set": false,
     "token_type": 1,
     "value_raw": 5,
+    "extended_token": false,
     "token": "034254015"
+  },
+  {
+    "serial_number": "TEST220000001",
+    "starting_code": 516959010,
+    "key": "bc41ec9530f6dac86b1a29ab82edc5fb",
+    "token_count": 8,
+    "restricted_digit_set": false,
+    "token_type": 1,
+    "value_raw": 5,
+    "extended_token": true,
+    "token": "158793959015"
   },
   {
     "serial_number": "TEST220000001",
@@ -37,7 +73,19 @@
     "restricted_digit_set": false,
     "token_type": 1,
     "value_raw": 995,
+    "extended_token": false,
     "token": "409152005"
+  },
+  {
+    "serial_number": "TEST220000001",
+    "starting_code": 516959010,
+    "key": "bc41ec9530f6dac86b1a29ab82edc5fb",
+    "token_count": 10,
+    "restricted_digit_set": false,
+    "token_type": 1,
+    "value_raw": 995,
+    "extended_token": true,
+    "token": "346418960005"
   },
   {
     "serial_number": "TEST220000001",
@@ -47,7 +95,19 @@
     "restricted_digit_set": false,
     "token_type": 1,
     "value_raw": 998,
+    "extended_token": false,
     "token": "071763008"
+  },
+  {
+    "serial_number": "TEST220000001",
+    "starting_code": 516959010,
+    "key": "bc41ec9530f6dac86b1a29ab82edc5fb",
+    "token_count": 12,
+    "restricted_digit_set": false,
+    "token_type": 1,
+    "value_raw": 998,
+    "extended_token": true,
+    "token": "738674960008"
   },
   {
     "serial_number": "TEST220000001",
@@ -57,6 +117,7 @@
     "restricted_digit_set": false,
     "token_type": 1,
     "value_raw": 999,
+    "extended_token": false,
     "token": "814704009"
   },
   {
@@ -65,9 +126,10 @@
     "key": "bc41ec9530f6dac86b1a29ab82edc5fb",
     "token_count": 14,
     "restricted_digit_set": false,
-    "token_type": 2,
-    "value_raw": 1,
-    "token": "141465011"
+    "token_type": 1,
+    "value_raw": 999,
+    "extended_token": true,
+    "token": "036504960009"
   },
   {
     "serial_number": "TEST220000001",
@@ -76,8 +138,20 @@
     "token_count": 16,
     "restricted_digit_set": false,
     "token_type": 2,
-    "value_raw": 2,
-    "token": "448320012"
+    "value_raw": 1,
+    "extended_token": false,
+    "token": "084661011"
+  },
+  {
+    "serial_number": "TEST220000001",
+    "starting_code": 516959010,
+    "key": "bc41ec9530f6dac86b1a29ab82edc5fb",
+    "token_count": 17,
+    "restricted_digit_set": false,
+    "token_type": 2,
+    "value_raw": 1,
+    "extended_token": true,
+    "token": "342484959011"
   },
   {
     "serial_number": "TEST220000001",
@@ -86,8 +160,20 @@
     "token_count": 18,
     "restricted_digit_set": false,
     "token_type": 2,
-    "value_raw": 5,
-    "token": "730651015"
+    "value_raw": 2,
+    "extended_token": false,
+    "token": "569243012"
+  },
+  {
+    "serial_number": "TEST220000001",
+    "starting_code": 516959010,
+    "key": "bc41ec9530f6dac86b1a29ab82edc5fb",
+    "token_count": 19,
+    "restricted_digit_set": false,
+    "token_type": 2,
+    "value_raw": 2,
+    "extended_token": true,
+    "token": "033302959012"
   },
   {
     "serial_number": "TEST220000001",
@@ -96,8 +182,20 @@
     "token_count": 20,
     "restricted_digit_set": false,
     "token_type": 2,
-    "value_raw": 995,
-    "token": "132820005"
+    "value_raw": 5,
+    "extended_token": false,
+    "token": "953870015"
+  },
+  {
+    "serial_number": "TEST220000001",
+    "starting_code": 516959010,
+    "key": "bc41ec9530f6dac86b1a29ab82edc5fb",
+    "token_count": 21,
+    "restricted_digit_set": false,
+    "token_type": 2,
+    "value_raw": 5,
+    "extended_token": true,
+    "token": "858173959015"
   },
   {
     "serial_number": "TEST220000001",
@@ -106,8 +204,20 @@
     "token_count": 22,
     "restricted_digit_set": false,
     "token_type": 2,
-    "value_raw": 998,
-    "token": "146345008"
+    "value_raw": 995,
+    "extended_token": false,
+    "token": "949090005"
+  },
+  {
+    "serial_number": "TEST220000001",
+    "starting_code": 516959010,
+    "key": "bc41ec9530f6dac86b1a29ab82edc5fb",
+    "token_count": 23,
+    "restricted_digit_set": false,
+    "token_type": 2,
+    "value_raw": 995,
+    "extended_token": true,
+    "token": "398002960005"
   },
   {
     "serial_number": "TEST220000001",
@@ -116,8 +226,42 @@
     "token_count": 24,
     "restricted_digit_set": false,
     "token_type": 2,
+    "value_raw": 998,
+    "extended_token": false,
+    "token": "574433008"
+  },
+  {
+    "serial_number": "TEST220000001",
+    "starting_code": 516959010,
+    "key": "bc41ec9530f6dac86b1a29ab82edc5fb",
+    "token_count": 25,
+    "restricted_digit_set": false,
+    "token_type": 2,
+    "value_raw": 998,
+    "extended_token": true,
+    "token": "434362960008"
+  },
+  {
+    "serial_number": "TEST220000001",
+    "starting_code": 516959010,
+    "key": "bc41ec9530f6dac86b1a29ab82edc5fb",
+    "token_count": 26,
+    "restricted_digit_set": false,
+    "token_type": 2,
     "value_raw": 999,
-    "token": "386863009"
+    "extended_token": false,
+    "token": "017663009"
+  },
+  {
+    "serial_number": "TEST220000001",
+    "starting_code": 516959010,
+    "key": "bc41ec9530f6dac86b1a29ab82edc5fb",
+    "token_count": 27,
+    "restricted_digit_set": false,
+    "token_type": 2,
+    "value_raw": 999,
+    "extended_token": true,
+    "token": "998074960009"
   },
   {
     "serial_number": "TEST240000002",
@@ -127,7 +271,19 @@
     "restricted_digit_set": true,
     "token_type": 1,
     "value_raw": 1,
+    "extended_token": false,
     "token": "413441444234331"
+  },
+  {
+    "serial_number": "TEST240000002",
+    "starting_code": 432435255,
+    "key": "dac86b1a29ab82edc5fbbc41ec9530f6",
+    "token_count": 4,
+    "restricted_digit_set": true,
+    "token_type": 1,
+    "value_raw": 1,
+    "extended_token": true,
+    "token": "12224323334223111431"
   },
   {
     "serial_number": "TEST240000002",
@@ -137,7 +293,19 @@
     "restricted_digit_set": true,
     "token_type": 1,
     "value_raw": 2,
+    "extended_token": false,
     "token": "431131331113332"
+  },
+  {
+    "serial_number": "TEST240000002",
+    "starting_code": 432435255,
+    "key": "dac86b1a29ab82edc5fbbc41ec9530f6",
+    "token_count": 6,
+    "restricted_digit_set": true,
+    "token_type": 1,
+    "value_raw": 2,
+    "extended_token": true,
+    "token": "32413234412423321432"
   },
   {
     "serial_number": "TEST240000002",
@@ -147,7 +315,19 @@
     "restricted_digit_set": true,
     "token_type": 1,
     "value_raw": 5,
+    "extended_token": false,
     "token": "423424444232241"
+  },
+  {
+    "serial_number": "TEST240000002",
+    "starting_code": 432435255,
+    "key": "dac86b1a29ab82edc5fbbc41ec9530f6",
+    "token_count": 8,
+    "restricted_digit_set": true,
+    "token_type": 1,
+    "value_raw": 5,
+    "extended_token": true,
+    "token": "42243244223242414441"
   },
   {
     "serial_number": "TEST240000002",
@@ -157,7 +337,19 @@
     "restricted_digit_set": true,
     "token_type": 1,
     "value_raw": 995,
+    "extended_token": false,
     "token": "422313413112333"
+  },
+  {
+    "serial_number": "TEST240000002",
+    "starting_code": 432435255,
+    "key": "dac86b1a29ab82edc5fbbc41ec9530f6",
+    "token_count": 10,
+    "restricted_digit_set": true,
+    "token_type": 1,
+    "value_raw": 995,
+    "extended_token": true,
+    "token": "22321432323221313233"
   },
   {
     "serial_number": "TEST240000002",
@@ -167,7 +359,19 @@
     "restricted_digit_set": true,
     "token_type": 1,
     "value_raw": 998,
+    "extended_token": false,
     "token": "231434142221342"
+  },
+  {
+    "serial_number": "TEST240000002",
+    "starting_code": 432435255,
+    "key": "dac86b1a29ab82edc5fbbc41ec9530f6",
+    "token_count": 12,
+    "restricted_digit_set": true,
+    "token_type": 1,
+    "value_raw": 998,
+    "extended_token": true,
+    "token": "21443212141334233242"
   },
   {
     "serial_number": "TEST240000002",
@@ -177,6 +381,7 @@
     "restricted_digit_set": true,
     "token_type": 1,
     "value_raw": 999,
+    "extended_token": false,
     "token": "242313431134143"
   },
   {
@@ -185,9 +390,10 @@
     "key": "dac86b1a29ab82edc5fbbc41ec9530f6",
     "token_count": 14,
     "restricted_digit_set": true,
-    "token_type": 2,
-    "value_raw": 1,
-    "token": "113434333414311"
+    "token_type": 1,
+    "value_raw": 999,
+    "extended_token": true,
+    "token": "13342341143431434243"
   },
   {
     "serial_number": "TEST240000002",
@@ -196,8 +402,20 @@
     "token_count": 16,
     "restricted_digit_set": true,
     "token_type": 2,
-    "value_raw": 2,
-    "token": "414212121322332"
+    "value_raw": 1,
+    "extended_token": false,
+    "token": "322233323341431"
+  },
+  {
+    "serial_number": "TEST240000002",
+    "starting_code": 432435255,
+    "key": "dac86b1a29ab82edc5fbbc41ec9530f6",
+    "token_count": 17,
+    "restricted_digit_set": true,
+    "token_type": 2,
+    "value_raw": 1,
+    "extended_token": true,
+    "token": "43123241414334323431"
   },
   {
     "serial_number": "TEST240000002",
@@ -206,8 +424,20 @@
     "token_count": 18,
     "restricted_digit_set": true,
     "token_type": 2,
-    "value_raw": 5,
-    "token": "413424224321241"
+    "value_raw": 2,
+    "extended_token": false,
+    "token": "314441232332312"
+  },
+  {
+    "serial_number": "TEST240000002",
+    "starting_code": 432435255,
+    "key": "dac86b1a29ab82edc5fbbc41ec9530f6",
+    "token_count": 19,
+    "restricted_digit_set": true,
+    "token_type": 2,
+    "value_raw": 2,
+    "extended_token": true,
+    "token": "14211341114322122432"
   },
   {
     "serial_number": "TEST240000002",
@@ -216,8 +446,20 @@
     "token_count": 20,
     "restricted_digit_set": true,
     "token_type": 2,
-    "value_raw": 995,
-    "token": "342124322343233"
+    "value_raw": 5,
+    "extended_token": false,
+    "token": "224414221443441"
+  },
+  {
+    "serial_number": "TEST240000002",
+    "starting_code": 432435255,
+    "key": "dac86b1a29ab82edc5fbbc41ec9530f6",
+    "token_count": 21,
+    "restricted_digit_set": true,
+    "token_type": 2,
+    "value_raw": 5,
+    "extended_token": true,
+    "token": "42321323214121133441"
   },
   {
     "serial_number": "TEST240000002",
@@ -226,8 +468,20 @@
     "token_count": 22,
     "restricted_digit_set": true,
     "token_type": 2,
-    "value_raw": 998,
-    "token": "211422314241142"
+    "value_raw": 995,
+    "extended_token": false,
+    "token": "234142213341113"
+  },
+  {
+    "serial_number": "TEST240000002",
+    "starting_code": 432435255,
+    "key": "dac86b1a29ab82edc5fbbc41ec9530f6",
+    "token_count": 23,
+    "restricted_digit_set": true,
+    "token_type": 2,
+    "value_raw": 995,
+    "extended_token": true,
+    "token": "42424443333433421233"
   },
   {
     "serial_number": "TEST240000002",
@@ -236,7 +490,41 @@
     "token_count": 24,
     "restricted_digit_set": true,
     "token_type": 2,
+    "value_raw": 998,
+    "extended_token": false,
+    "token": "433132413232242"
+  },
+  {
+    "serial_number": "TEST240000002",
+    "starting_code": 432435255,
+    "key": "dac86b1a29ab82edc5fbbc41ec9530f6",
+    "token_count": 25,
+    "restricted_digit_set": true,
+    "token_type": 2,
+    "value_raw": 998,
+    "extended_token": true,
+    "token": "34423331124414212242"
+  },
+  {
+    "serial_number": "TEST240000002",
+    "starting_code": 432435255,
+    "key": "dac86b1a29ab82edc5fbbc41ec9530f6",
+    "token_count": 26,
+    "restricted_digit_set": true,
+    "token_type": 2,
     "value_raw": 999,
-    "token": "331233113332423"
+    "extended_token": false,
+    "token": "243142412213343"
+  },
+  {
+    "serial_number": "TEST240000002",
+    "starting_code": 432435255,
+    "key": "dac86b1a29ab82edc5fbbc41ec9530f6",
+    "token_count": 27,
+    "restricted_digit_set": true,
+    "token_type": 2,
+    "value_raw": 999,
+    "extended_token": true,
+    "token": "14341211233234443243"
   }
 ]
