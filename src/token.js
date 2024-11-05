@@ -34,7 +34,6 @@ class OpenPAYGOTokenShared {
     let hash = this.genHash({
       key: key,
       msg: duplicatedToken,
-      asByte: true,
     })
 
     return this.convertHash2Token(hash)
@@ -98,16 +97,18 @@ class OpenPAYGOTokenShared {
 
 class OpenPAYGOTokenSharedExtended {
   static MAX_BASE_EXTENDED = 999999
-  static MAX_ACTIVATION_VALUE_EXTENDED = 999999
-  static TOKEN_VALUE_OFFSET_EXTENDED = 1000000
+  static MAX_ACTIVATION_VALUE_EXTENDED = 999999n
+  static TOKEN_VALUE_OFFSET_EXTENDED = 1000000n
 
   constructor() {}
 
   static getTokenBase(code) {
-    return code % this.TOKEN_VALUE_OFFSET_EXTENDED
+    return BigInt(code) % this.TOKEN_VALUE_OFFSET_EXTENDED
   }
 
   static putBaseInToken(token, tokenBase) {
+    token = BigInt(token)
+    tokenBase = BigInt(tokenBase)
     if (tokenBase > this.MAX_BASE_EXTENDED) {
       throw new Error("Invalid token base value")
     }
@@ -115,14 +116,13 @@ class OpenPAYGOTokenSharedExtended {
   }
 
   static genNextToken(prev_token, key) {
-    const conformedToken = Buffer.alloc(4) // Allocate buffer of 4 bytes
-    conformedToken.writeUInt32BE(prev_token, 0) // Write the integer value into buffer as big-endian
+    prev_token = BigInt(prev_token)
+    const conformedToken = Buffer.alloc(8) // Allocate buffer of 8 bytes
+    conformedToken.writeBigUInt64BE(prev_token, 0) // Write the integer value into buffer as big-endian
 
-    // Duplicate the buffer by concatenating it with itself
-    const duplicatedToken = Buffer.concat([conformedToken, conformedToken])
     let hash = this.genHash({
       key: key,
-      msg: duplicatedToken,
+      msg: conformedToken,
       asByte: true,
     })
 
@@ -130,27 +130,17 @@ class OpenPAYGOTokenSharedExtended {
   }
 
   static convertHash2Token(hash) {
-    // convert hash from hex
-
-    const hashBuffer = bigintConversion.hexToBuf(hash, true)
-
-    const dView = new DataView(hashBuffer)
-
-    // take first 4 btypes
-    const hash_msb = dView.getUint32(0) // as big endian
-    // take last 4 bytes
-    const hash_lsb = dView.getUint32(4) // as big endian
-
-    const hashUnit = (hash_msb ^ hash_lsb) >>> 0
-    const token = this.convertTo29_5_bits(hashUnit)
+    const hashUint = bigintConversion.hexToBigint(hash)
+    const token = this.convertTo_40_bits(hashUint)
     return token
   }
 
-  static convertTo29_5_bits(hash_uint) {
+  static convertTo_40_bits(hash_uint) {
     // port from original lib
-    const mask = ((1 << (64 - 24 + 1)) - 1) << 24
-    let temp = (hash_uint & mask) >>> 24
-    if (temp > 999999999999) temp = temp - 99511627777
+    // const mask = ((1 << (64 - 24 + 1)) - 1) << 24
+    const mask = 36893488147402326016n
+    let temp = (hash_uint & mask) >> 24n
+    if (temp > 999999999999n) temp = temp - 99511627777n
     return temp
   }
 
@@ -187,6 +177,14 @@ function bitArrayFromInt(number, bitLength) {
   return bitArray
 }
 
+function bitArrayFromBigInt(number, bitLength) {
+  let bitArray = []
+  for (let i = 0; i < bitLength; i++) {
+    bitArray.push((number & (1n << BigInt(bitLength - 1 - i))) !== 0n)
+  }
+  return bitArray
+}
+
 function bitArrayToInt(bit_array) {
   let num = 0
   for (let bit of bit_array) {
@@ -209,14 +207,20 @@ function convertFrom4digitToken(token) {
 function convertToNdigitToken(token, digit = 4) {
   // token should be a number data type
   let restrictedDigitToken = ""
-  let bitArray = bitArrayFromInt(token, digit * 2)
+  let bitArray
+  if (typeof token === "bigint") {
+    bitArray = bitArrayFromBigInt(token, digit * 2)
+  } else {
+    bitArray = bitArrayFromInt(token, digit * 2)
+  }
 
   for (let i = 0; i < digit; i++) {
     restrictedDigitToken += (
       bitArrayToInt(bitArray.slice(i * 2, i * 2 + 2)) + 1
     ).toString()
   }
-  return parseInt(restrictedDigitToken, 10)
+
+  return restrictedDigitToken
 }
 
 module.exports = {
