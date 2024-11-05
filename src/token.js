@@ -34,7 +34,6 @@ class OpenPAYGOTokenShared {
     let hash = this.genHash({
       key: key,
       msg: duplicatedToken,
-      asByte: true,
     })
 
     return this.convertHash2Token(hash)
