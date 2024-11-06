@@ -10,15 +10,15 @@ describe("OpenPAYGOTokenDecoder test", () => {
       new Decorder().decodeToken({
         token: data.token,
         secretKeyHex: data.key,
-        count: data.token_count,
+        count: data.count,
         usedCounts: [],
         startingCode: data.starting_code,
         restrictedDigitSet: data.restricted_digit_set,
       })
 
-    expect(value).toBeUndefined()
+    expect(value).toBeDefined()
     expect(count).toBeUndefined()
-    expect(updatedCounts).toBeUndefined()
-    expect(tokenType).toEqual(TokenTypes.ALREADY_USED)
+    expect(updatedCounts).toBeDefined()
+    expect(tokenType).toEqual(TokenTypes.ADD_TIME)
   })
 })

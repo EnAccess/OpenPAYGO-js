@@ -81,7 +81,7 @@ class OpenPAYGOTokenEncoder {
     let currentToken = shared.putBaseInToken(startingCode, tokenBase)
     const newCount = this.#getNewCount(count, mode)
 
-    for (let i = 0; i < newCount - 1; i++) {
+    for (let i = 0; i < newCount; i++) {
       currentToken = shared.genNextToken(currentToken, key)
     }
 
@@ -113,7 +113,7 @@ class OpenPAYGOTokenEncoder {
     let currentToken = sharedExtended.putBaseInToken(startingCode, tokenBase)
     const newCount = this.#getNewCount(count, mode)
 
-    for (let i = 0; i < newCount - 2; i++) {
+    for (let i = 0; i < newCount; i++) {
       currentToken = sharedExtended.genNextToken(currentToken, key)
     }
     let finalToken = sharedExtended.putBaseInToken(currentToken, tokenBase)
