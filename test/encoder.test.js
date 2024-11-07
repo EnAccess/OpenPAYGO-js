@@ -33,6 +33,7 @@ describe("OpenPAYGOTokenEncoder test", () => {
           value: data.value_raw,
           extendToken: data.extended_token,
         })
+        expect(finalToken).toBe(data.token)
       } catch (err) {
         if (data.value_raw === null || data.value_raw === undefined) {
           console.log(`value for token (${data.token}) is null`)
@@ -40,7 +41,6 @@ describe("OpenPAYGOTokenEncoder test", () => {
         }
         expect(data.extended_token).toBe(false)
         expect(data.value_raw > shared.MAX_ACTIVATION_VALUE).toBe(true)
-        console.log("Failed: ", err)
       }
     })
   })
