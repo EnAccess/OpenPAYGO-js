@@ -22,7 +22,7 @@ const HomeComponent: React.FC = () => {
   const [startingCode, setStartingCode] = useState<number | null>(null)
   const [privateKey, setPrivateKey] = useState<string>("")
   const [selectedCommand, setSelectedCommand] = useState<string>("1")
-  const [commandArgument, setCommandArgument] = useState<number>(7)
+  const [commandArgument, setCommandArgument] = useState<number>()
   const [result, setResult] = useState<TokenData | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -30,7 +30,7 @@ const HomeComponent: React.FC = () => {
     "1": { name: "add_time - Add PAYG time", requiresArgument: true },
     "2": { name: "set_time - Set PAYG time", requiresArgument: true },
     "3": { name: "disable_payg - Disable PAYG", requiresArgument: false },
-    "4": { name: "counter_sync - Counter sync", requiresArgument: true },
+    "4": { name: "counter_sync - Counter sync", requiresArgument: false },
   }
 
   const handleSubmit = async (
@@ -39,10 +39,6 @@ const HomeComponent: React.FC = () => {
     e.preventDefault()
     setError(null)
 
-    if (!serialNumber) {
-      setError("Serial number is required")
-      return
-    }
     if (counter === null || isNaN(counter)) {
       setError("Counter must be a valid number")
       return
@@ -64,12 +60,12 @@ const HomeComponent: React.FC = () => {
     const encoder = new Encoder()
     try {
       const { finalToken, newCount } = encoder.generateToken({
-        tokenType: 1,
+        tokenType: parseInt(selectedCommand),
         secretKeyHex: privateKey,
         count: counter,
         startingCode: startingCode,
         restrictDigitSet: false,
-        value: 1,
+        value: commandArgument,
         extendToken: false,
       })
 
@@ -101,7 +97,7 @@ const HomeComponent: React.FC = () => {
                 htmlFor="serialNumber"
                 className="block text-sm font-bold text-gray-700"
               >
-                Serial number:
+                Serial number (Optional):
               </label>
               <input
                 type="text"
@@ -110,7 +106,6 @@ const HomeComponent: React.FC = () => {
                 value={serialNumber}
                 onChange={(e) => setSerialNumber(e.target.value)}
                 placeholder="ex: HQ1932ER3DF"
-                required
               />
             </div>
             <div className="mb-4">
@@ -205,7 +200,7 @@ const HomeComponent: React.FC = () => {
                   htmlFor="commandArgument"
                   className="block text-sm font-bold text-gray-700"
                 >
-                  Command argument:
+                  Activation days:
                 </label>
                 <input
                   type="number"
@@ -230,36 +225,36 @@ const HomeComponent: React.FC = () => {
             {error && <p className="text-red-500">{error}</p>}
             {result && (
               <div className="mt-4">
-                <h2 className="font-bold">Result:</h2>
+                <h2 className="font-bold text-black">Result:</h2>
                 <table className="min-w-full border border-gray-300 mt-2">
                   <thead>
                     <tr className="bg-gray-100">
-                      <th className="border border-gray-300 px-4 py-2">
+                      <th className="border border-gray-300 px-4 py-2 text-gray-700">
                         Serial
                       </th>
-                      <th className="border border-gray-300 px-4 py-2">
+                      <th className="border border-gray-300 px-4 py-2 text-gray-700">
                         Command
                       </th>
-                      <th className="border border-gray-300 px-4 py-2">
+                      <th className="border border-gray-300 px-4 py-2 text-gray-700">
                         Token
                       </th>
-                      <th className="border border-gray-300 px-4 py-2">
+                      <th className="border border-gray-300 px-4 py-2 text-gray-700">
                         Counter
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="border border-gray-300 px-4 py-2">
+                      <td className="border border-gray-300 px-4 py-2 text-black">
                         {serialNumber}
                       </td>
-                      <td className="border border-gray-300 px-4 py-2">
+                      <td className="border border-gray-300 px-4 py-2 text-black">
                         {commandOptions[selectedCommand].name}
                       </td>
-                      <td className="border border-gray-300 px-4 py-2">
+                      <td className="border border-gray-300 px-4 py-2 text-black">
                         {result.finalToken || "N/A"}
                       </td>
-                      <td className="border border-gray-300 px-4 py-2">
+                      <td className="border border-gray-300 px-4 py-2 text-black">
                         {result.newCount || "N/A"}
                       </td>
                     </tr>
