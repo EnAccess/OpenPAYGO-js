@@ -6,7 +6,7 @@ declare module "openpaygo" {
       count: number
       startingCode: number
       restrictDigitSet: boolean
-      value: number
+      value: number | undefined
       extendToken: boolean
     }): { finalToken: string; newCount: number }
   }
