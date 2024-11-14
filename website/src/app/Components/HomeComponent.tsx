@@ -101,7 +101,7 @@ const HomeComponent: React.FC = () => {
               </label>
               <input
                 type="text"
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black"
+                className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black placeholder-gray-700"
                 id="serialNumber"
                 value={serialNumber}
                 onChange={(e) => setSerialNumber(e.target.value)}
@@ -117,7 +117,7 @@ const HomeComponent: React.FC = () => {
               </label>
               <input
                 type="number"
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black"
+                className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black placeholder-gray-700"
                 id="counter"
                 value={counter ?? ""}
                 onChange={(e) =>
@@ -136,7 +136,7 @@ const HomeComponent: React.FC = () => {
               </label>
               <input
                 type="number"
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black"
+                className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black placeholder-gray-700"
                 id="startingCode"
                 value={startingCode ?? ""}
                 onChange={(e) =>
@@ -157,7 +157,7 @@ const HomeComponent: React.FC = () => {
               </label>
               <input
                 type="text"
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black"
+                className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black placeholder-gray-700"
                 id="privateKey"
                 value={privateKey}
                 onChange={(e) => setPrivateKey(e.target.value)}
@@ -204,7 +204,7 @@ const HomeComponent: React.FC = () => {
                 </label>
                 <input
                   type="number"
-                  className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black"
+                  className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black placeholder-gray-700"
                   id="commandArgument"
                   value={commandArgument}
                   onChange={(e) => setCommandArgument(parseInt(e.target.value))}
