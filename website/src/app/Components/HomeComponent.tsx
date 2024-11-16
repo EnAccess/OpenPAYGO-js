@@ -22,7 +22,9 @@ const HomeComponent: React.FC = () => {
   const [startingCode, setStartingCode] = useState<number | null>(null)
   const [privateKey, setPrivateKey] = useState<string>("")
   const [selectedCommand, setSelectedCommand] = useState<string>("1")
-  const [commandArgument, setCommandArgument] = useState<number|undefined>(undefined)
+  const [commandArgument, setCommandArgument] = useState<number | undefined>(
+    undefined
+  )
   const [result, setResult] = useState<TokenData | null>(null)
   const [error, setError] = useState<string | null>(null)
 
