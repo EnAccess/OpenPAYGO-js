@@ -123,7 +123,6 @@ class OpenPAYGOTokenSharedExtended {
     let hash = this.genHash({
       key: key,
       msg: conformedToken,
-      asByte: true,
     })
 
     return this.convertHash2Token(hash)
