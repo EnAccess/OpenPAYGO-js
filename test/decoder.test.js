@@ -1,6 +1,6 @@
 const sample = require("./sample_tokens.json")
-const TokenTypes = require("../src/constants").TokenTypes
-const Decorder = require("../src/decoder").OpenPAYGOTokenDecoder
+const TokenTypes = require("../src/token").TokenTypes
+const Decorder = require("../src/token").OpenPAYGOTokenDecoder
 
 describe("OpenPAYGOTokenDecoder test", () => {
   test("decodeToken", () => {

@@ -1,5 +1,5 @@
 const sample = require("./sample_tokens.json")
-const Encoder = require("../src/encoder").OpenPAYGOTokenEncoder
+const Encoder = require("../src/token").OpenPAYGOTokenEncoder
 const shared = require("../src/token").OpenPAYGOTokenShared
 
 function convertTokenTypeToNumber(token_str) {
