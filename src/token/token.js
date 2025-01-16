@@ -1,7 +1,7 @@
 "use strict"
 
 const bigintConversion = require("bigint-conversion")
-const siphash24 = require("./lib/siphash")
+const siphash24 = require("../lib/siphash")
 const Buffer = require("buffer/").Buffer
 
 class OpenPAYGOTokenShared {
