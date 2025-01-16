@@ -10,7 +10,6 @@ class AuthMethod {
 }
 
 class OpenPAYGOMetricsShared {
-    
   static CONDENSED_KEY_NAMES = {
     // Request
     serial_number: "sn",
@@ -120,7 +119,7 @@ class OpenPAYGOMetricsShared {
           key: secretKey,
         })
         break
-      case AuthMethod.DATA_AUTH:
+      case AuthMethod.DATA_AUTH: {
         let payload = data.serial_number
         if (data.timestamp) payload += String(data.timestamp)
         if (data.request_count) payload += String(data.request_count)
@@ -129,7 +128,8 @@ class OpenPAYGOMetricsShared {
           payload += this.convertToMetricsJson(data.historical_data)
         signature = this.generateHashString({ msg: payload, key: secretKey })
         break
-      case AuthMethod.RECURSIVE_DATA_AUTH:
+      }
+      case AuthMethod.RECURSIVE_DATA_AUTH: {
         let recursivePayload = this.generateHashString({
           msg: data.serial_number,
           key: secretKey,
@@ -156,6 +156,7 @@ class OpenPAYGOMetricsShared {
         }
         signature = recursivePayload
         break
+      }
       default:
         throw new Error("Invalid Authentication Method")
     }
