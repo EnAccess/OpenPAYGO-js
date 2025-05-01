@@ -108,10 +108,10 @@ Not all libraries have implemented the full range of features yet.
 
 The **OpenPAYGO JavaScript library** supports the following features:
 
-| Feature           | Status               |
-| ----------------- | -------------------- |
-| OpenPAYGO Token   | ✅ (stable)          |
-| OpenPAYGO Metrics | ❌ (not implemented) |
+| Feature           | Status      |
+| ----------------- | ----------- |
+| OpenPAYGO Token   | ✅ (stable) |
+| OpenPAYGO Metrics | ✅ (Beta)   |
 
 ## Support
 

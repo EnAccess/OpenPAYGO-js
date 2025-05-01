@@ -9,6 +9,16 @@ declare module "openpaygo" {
     ALREADY_USED = 11,
     PAYG_DISABLE_VALUE = 998,
   }
+
+  // metrics auth methods
+  export enum AuthMethod {
+    SIMPLE_AUTH = "sa",
+    TIMESTAMP_AUTH = "ta",
+    COUNTER_AUTH = "ca",
+    DATA_AUTH = "da",
+    RECURSIVE_DATA_AUTH = "ra",
+  }
+
   /**
    * Encoder class for generating OpenPAYGO tokens based on various configurations.
    */
