@@ -68,7 +68,7 @@ class OpenPAYGOTokenDecoder {
     //         })
     // }
 
-    var { value, tokenType, newCount, updatedCounts } =
+    var { value, tokenType, count: newCount, updatedCounts } =
       OpenPAYGOTokenDecoder.#getActivationValueCountAndTypefromToken({
         token,
         startingCode,
@@ -124,7 +124,7 @@ class OpenPAYGOTokenDecoder {
         if (value === shared.COUNTER_SYNC_VALUE) {
           tokenType = TokenTypes.COUNTER_SYNC
         } else if (value === shared.PAYG_DISABLE_VALUE) {
-          tokenType = TokenTypes.PAYG_DISABLE_VALUE
+          tokenType = TokenTypes.DISABLE_PAYG
         } else {
           tokenType = TokenTypes.SET_TIME
         }
@@ -177,8 +177,8 @@ class OpenPAYGOTokenDecoder {
       return true
     } else if (this.MAX_UNUSED_OLDER_TOKENS > 0) {
       if (count > lastCount - this.MAX_UNUSED_OLDER_TOKENS) {
-        if (usedCounts.includes(count) && type === TokenTypes.ADD_TIME) {
-          return True
+        if (!usedCounts.includes(count) || type !== TokenTypes.ADD_TIME) {
+          return true
         }
       }
     }
@@ -186,10 +186,10 @@ class OpenPAYGOTokenDecoder {
   }
 
   static #updateUsedCounts(pastUsedCounts, value, newCount, type) {
-    if (pastUsedCounts.length) {
-      return undefined
+    if (!pastUsedCounts || !pastUsedCounts.length) {
+      pastUsedCounts = []
     }
-    let highestCount = pastUsedCounts.length ? Math.max(pastUsedCounts) : 0
+    let highestCount = pastUsedCounts.length ? Math.max(...pastUsedCounts) : 0
     highestCount = newCount > highestCount ? newCount : highestCount
     const bottomRange = highestCount - this.MAX_UNUSED_OLDER_TOKENS
     const usedCounts = []
