@@ -177,7 +177,7 @@ class OpenPAYGOTokenDecoder {
       return true
     } else if (this.MAX_UNUSED_OLDER_TOKENS > 0) {
       if (count > lastCount - this.MAX_UNUSED_OLDER_TOKENS) {
-        if (!usedCounts.includes(count) || type !== TokenTypes.ADD_TIME) {
+        if ((!usedCounts || !usedCounts.includes(count)) && type === TokenTypes.ADD_TIME) {
           return true
         }
       }
