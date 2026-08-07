@@ -68,15 +68,19 @@ class OpenPAYGOTokenDecoder {
     //         })
     // }
 
-    var { value, tokenType, count: newCount, updatedCounts } =
-      OpenPAYGOTokenDecoder.#getActivationValueCountAndTypefromToken({
-        token,
-        startingCode,
-        keyHex: secretKeyHex,
-        count,
-        restrictedDigitSet,
-        usedCounts,
-      })
+    var {
+      value,
+      tokenType,
+      count: newCount,
+      updatedCounts,
+    } = OpenPAYGOTokenDecoder.#getActivationValueCountAndTypefromToken({
+      token,
+      startingCode,
+      keyHex: secretKeyHex,
+      count,
+      restrictedDigitSet,
+      usedCounts,
+    })
 
     if (value !== undefined && valueDivider) {
       value = value / valueDivider
@@ -177,7 +181,10 @@ class OpenPAYGOTokenDecoder {
       return true
     } else if (this.MAX_UNUSED_OLDER_TOKENS > 0) {
       if (count > lastCount - this.MAX_UNUSED_OLDER_TOKENS) {
-        if ((!usedCounts || !usedCounts.includes(count)) && type === TokenTypes.ADD_TIME) {
+        if (
+          (!usedCounts || !usedCounts.includes(count)) &&
+          type === TokenTypes.ADD_TIME
+        ) {
           return true
         }
       }
